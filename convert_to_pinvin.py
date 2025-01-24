@@ -525,16 +525,39 @@ def print_chinese_code(char_codes, outfile=sys.stdout):
             freq = get_freq_of_word(word, kWordsFreq)
             print("%s\t%s\t%i" % (word, code, freq), file=outfile)
 
+def get_header(name, input_tables):
+    hdr = f"""# rime dictionary
+# encoding: utf-8
+
+---
+name: {name}
+version: "0.1"
+sort: by_weight
+"""
+    if input_tables:
+        hdr += "import_tables:\n"
+        for table in input_tables:
+            hdr += f"  - {table}\n"
+    hdr += "...\n"
+    return hdr
+
 if __name__ == "__main__":
     # control output with a argparser as follows:
     # python convert_to_pinyin.py --chinese_code <input_file>
     # --chinese_code: print chinese code
+    # --name <name>: the name of the output file
+    # --input_tables <input1>...<inputN>: the input tables
     # <input_file>: the input file
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--chinese_code", help="print chinese code", action="store_true")
-    parser.add_argument("input_file", help="the input file")
+    parser.add_argument("--name", help="the name of the current table", required = True)
+    parser.add_argument("--input_tables", nargs='+', help="the input tables", default=None)
+    parser.add_argument("input_file", nargs="?", help="the input file", default=None)
     args = parser.parse_args()
+
+    print(get_header(args.name, args.input_tables), file=sys.stdout)
+
     if args.chinese_code:
         char_codes = get_code_of_chars_in_list()
         words_freq = get_frequency_from_file(PINYIN_SIMP_DICT)
