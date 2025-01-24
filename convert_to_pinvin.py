@@ -52,6 +52,9 @@ er el
 èr ehl
 ḿ m
 m̀ m
+ń n
+ň n
+ǹ n
 ńg ng
 ňg ng
 ǹg ng
@@ -215,7 +218,46 @@ yǐ ǐ
 yì ì
 """
 
+TONELESS_MAPPING = """
+ā a
+á a
+ǎ a
+à a
+ē e
+é e
+ě e
+è e
+ê ai
+ê̄ ai
+ế ai
+ê̌ ai
+ề ai
+ḿ m
+m̀ m
+ń n
+ň n
+ǹ n
+ō o
+ó o
+ǒ o
+ò o
+ī i
+í i
+ǐ i
+ì i
+ū u
+ú u
+ǔ u
+ù u
+ü v
+ǖ v
+ǘ v
+ǚ v
+ǜ v
+"""
+
 CHINESE_CODE = "chinese_code.txt"
+PINYIN_CODE = "pinyin.txt"
 PINYIN_SIMP_DICT = "pinyin_simp.dict.txt"
 PINYIN_SIMP_EXT1_DICT = "pinyin_simp_ext1.dict.txt"
 
@@ -239,9 +281,32 @@ def get_prefix_mapping():
         mapping[pinyin] = prefix
     return mapping
 
+# get toneless mapping
+def get_toneless_mapping():
+    mapping = dict()
+    for line in TONELESS_MAPPING.split('\n'):
+        line = line.strip()
+        if len(line) == 0:
+            continue
+        pinyin, toneless = line.split()
+        mapping[pinyin] = toneless
+    return mapping
+
 kPostfixMampping = get_postfix_mapping()
 kPrefixMapping = get_prefix_mapping()
+kTonelessMapping = get_toneless_mapping()
 
+# get the toneless pinyin from pinyin
+def get_toneless_pinyin(pinyin):
+    toneless = ''
+    for c in pinyin:
+        if c in kTonelessMapping:
+            toneless += kTonelessMapping[c]
+        else:
+            toneless += c
+    return toneless
+
+# geth the tonal pinvin from pinyin
 def get_pinvin(pinyin):
     # substitute the prefix from pinyin
     n = len(pinyin)
@@ -261,6 +326,22 @@ def get_pinvin(pinyin):
     pinyin = re.sub(r'([jqx])eu', r'\1u', pinyin)
     return pinyin
 
+# get the pinvin seq from pinyin seq with prefixing a 'v' to non-first elements beginning with 'a,o,e,i,u,y,w'
+def get_pinvin_seq(pinyin_seq):
+    pinvin_seq = []
+    for i in range(len(pinyin_seq)):
+        pinyin = pinyin_seq[i]
+        pinvin = get_pinvin(pinyin)
+        if i > 0 and begin_with_vowel(pinvin):
+            pinvin = 'v' + pinvin
+        pinvin_seq.append(pinvin)
+    return pinvin_seq
+
+# get the toneless pinyin seq from pinyin seq
+def get_toneless_pinyin_seq(pinyin_seq):
+    return [get_toneless_pinyin(pinyin) for pinyin in pinyin_seq]
+
+# get chinese code from a file with format "pinyin: word1 word2 ..."
 def get_chinese_code(file):
     words = dict()
     # read the file line by line
@@ -280,12 +361,38 @@ def get_chinese_code(file):
                 words[char].append(pinyin)
     return words
 
+# get pinyin code from a file with format "UNICODE: py1,py2 # word"
+def get_pinyin_code_from_file(file):
+    words = dict()
+    with open(file  , 'r') as f:
+        for line in f:
+            line = line.strip()
+            if len(line) == 0:
+                continue
+            if line[0] == '#':
+                continue
+            parts = re.split(r'\s+', line)
+            if len(parts) < 4:
+                continue
+            word = parts[3].strip()
+            pinyins = re.split(r',', parts[1])
+            if word not in words:
+                words[word] = []
+            for pinyin in pinyins:
+                words[word].append(pinyin)
+    return words
+
+def get_pinyin_code_of_chars():
+    return get_pinyin_code_from_file(PINYIN_CODE)
+
 # get chinese code by get_chinese_code
-def get_chinese_pinvin_code():
-    words = get_chinese_code(CHINESE_CODE)
+# return a dictionary of word and a list of pinyin code sequences
+def get_code_of_chars_in_list():
+    #words = get_chinese_code(CHINESE_CODE)
+    words = get_pinyin_code_from_file(PINYIN_CODE)
     for word in words:
         # convert the pinyin to pinvin
-        words[word] = [get_pinvin(pinyin) for pinyin in words[word]]
+        words[word] = [[pinyin] for pinyin in words[word]]
     return words
  
  # read words from file
@@ -322,8 +429,10 @@ def get_descartes_products(encodes):
         descartes = new_descartes
     return descartes
 
-def get_code_of_words(words):
-    chinese_code = get_chinese_pinvin_code()
+# get the pinyin code of words from a list of words
+# return a dictionary of word and a list of tonal pinyin code sequences
+def get_code_of_words(words: list) -> dict:
+    char_codes = get_pinyin_code_of_chars()
     word_codes = dict()
     for word in words:
         word_codes[word] = []
@@ -331,26 +440,18 @@ def get_code_of_words(words):
 
         on_error = False
         for char in word:
-            if char not in chinese_code:
+            if char not in char_codes:
                 print(char, "Not found", file=sys.stderr)
                 on_error = True
                 break
-            encodes.append(chinese_code[char])
+            encodes.append(char_codes[char])
         if on_error:
             continue
-
-        for product in get_descartes_products(encodes):
-            product = prepend_v(product)
-            word_code = ' '.join(product)
-            word_codes[word].append(word_code)
-
-            if begin_with_vowel(word_code):
-                alt_word_code = 'v' + word_code
-                word_codes[word].append(alt_word_code)  
+        word_codes[word] = get_descartes_products(encodes)
     return word_codes
 
 # get the frequency of words from a file
-def get_freq_from_file(file):
+def get_frequency_from_file(file):
     freq = dict()
     with open(file, 'r') as f:
         for line in f:
@@ -364,10 +465,12 @@ def get_freq_from_file(file):
     return freq
 
 # get the frequency of a character from freq_dict with default value 1.
-def get_freq_of_word(word, freq_dict):
+def get_freq_of_word(word, toneless_code, freq_dict):
     if word not in freq_dict:
         return 1
-    return sum(freq_dict[word].values())
+    if toneless_code not in freq_dict[word]:
+        return 1
+    return freq_dict[word][toneless_code]
 
 # get the sorted keys of a dictionary
 def get_sorted_keys(dict):
@@ -375,29 +478,39 @@ def get_sorted_keys(dict):
     keys.sort()
     return keys
 
-# print the word_codes which is a dictionary of key,list into a file with the format of word code frequency
-def print_word_codes(word_codes, outfile=sys.stdout):
-    word_freq = get_freq_from_file(PINYIN_SIMP_EXT1_DICT)
+def get_prepended_v_seqs(pinvin_seq):
+    res = [pinvin_seq]
+    if begin_with_vowel(pinvin_seq[0]):
+        res.append(['v' + pinvin_seq[0]] + pinvin_seq[1:])
+    return res
 
+# print the word_codes which is a dictionary of key,list into a file with the format of word code frequency
+# word_codes: a dictionary of word and a list of tonal pinyin code sequences,
+#               e.g. {'word': [['code1', 'code2'], ['code3', 'code4']]}
+def print_word_codes(word_codes, words_freq, outfile=sys.stdout):
     codes = dict()
     for word in word_codes:
-        for code in word_codes[word]:
-            if code not in codes:
-                codes[code] = []
-            codes[code].append(word)
+        for pinyin_seq in word_codes[word]:
+            toneless = ' '.join(get_toneless_pinyin_seq(pinyin_seq))
+            freq = get_freq_of_word(word, toneless, words_freq)
+            for pinvin_seq in get_prepended_v_seqs(get_pinvin_seq(pinyin_seq)):
+                code = ' '.join(pinvin_seq)
+                if code not in codes:
+                    codes[code] = dict()
+                codes[code][word] = freq
     
     for code in get_sorted_keys(codes):
-        for word in codes[code]:
-            freq = get_freq_of_word(word, word_freq)
+        for word in get_sorted_keys(codes[code]):
+            freq = codes[code][word]
             print("%s\t%s\t%i" % (word, code, freq), file=outfile)
 
 # print the chinese code in the same way
-def print_chinese_code(chinese_code, outfile=sys.stdout):
-    word_freq = get_freq_from_file(PINYIN_SIMP_DICT)
+def print_chinese_code(char_codes, outfile=sys.stdout):
+    kWordsFreq = get_frequency_from_file(PINYIN_SIMP_DICT)
     
     codes = dict()
-    for word in chinese_code:
-        for code in chinese_code[word]:
+    for word in char_codes:
+        for code in char_codes[word]:
             if code not in codes:
                 codes[code] = []
             codes[code].append(word)
@@ -408,8 +521,8 @@ def print_chinese_code(chinese_code, outfile=sys.stdout):
                 codes[altcode].append(word)
     
     for code in get_sorted_keys(codes):
-        for word in codes[code]:
-            freq = get_freq_of_word(word, word_freq)
+        for word in set(codes[code]):
+            freq = get_freq_of_word(word, kWordsFreq)
             print("%s\t%s\t%i" % (word, code, freq), file=outfile)
 
 if __name__ == "__main__":
@@ -423,10 +536,12 @@ if __name__ == "__main__":
     parser.add_argument("input_file", help="the input file")
     args = parser.parse_args()
     if args.chinese_code:
-        chinese_code = get_chinese_pinvin_code()
-        print_chinese_code(chinese_code)
+        char_codes = get_code_of_chars_in_list()
+        words_freq = get_frequency_from_file(PINYIN_SIMP_DICT)
+        print_word_codes(char_codes, words_freq)
 
     if args.input_file:
         words = get_words_from_file(args.input_file)
         word_codes = get_code_of_words(words)
-        print_word_codes(word_codes)
+        words_freq = get_frequency_from_file(PINYIN_SIMP_EXT1_DICT)
+        print_word_codes(word_codes, words_freq)
