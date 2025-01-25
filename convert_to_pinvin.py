@@ -415,13 +415,9 @@ def get_pinyin_phrases():
 def get_pinyin_code_of_chars():
     words = get_pinyin_code_from_file(PINYIN_CODE)
     standard_code = get_standard_code_from_file(STANDARD_CHINESE)
+    # prefer the standard code if different
     for word in standard_code:
-        if word not in words:
-            words[word] = standard_code[word]
-        else:
-            for pinyin in standard_code[word]:
-                if pinyin not in words[word]:
-                    words[word].append(pinyin)
+        words[word] = standard_code[word]
     return words
 
 # get pinyin codes of characters
