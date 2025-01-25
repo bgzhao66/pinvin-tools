@@ -349,6 +349,9 @@ def get_chinese_code(file):
     with open(file, 'r') as f:
         for line in f:
             line = line.strip()
+            #skip line beginning with '#' or empty line
+            if len(line) == 0 or line[0] == '#':
+                continue
             # split the line into words by spaces or commas or colons
             chars = re.split(r'[\s,:]', line)
             if len(chars) <= 1:
