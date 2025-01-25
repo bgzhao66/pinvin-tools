@@ -578,6 +578,20 @@ sort: by_weight
     hdr += "...\n"
     return hdr
 
+# compare the code of standard chinese and pinyin, if not match, print both of them
+def compare_code():
+    char_codes = get_pinyin_code_of_chars()
+    standard_code = get_standard_code_from_file(STANDARD_CHINESE)
+    for word in standard_code:
+        if word not in char_codes:
+            print(word, "Not found", file=sys.stderr)
+            continue
+
+        standard_code[word].sort()
+        char_codes[word].sort()
+        if standard_code[word] != char_codes[word]:
+            print(word, standard_code[word], char_codes[word], file=sys.stdout)
+
 if __name__ == "__main__":
     # control output with a argparser as follows:
     # python convert_to_pinyin.py --chinese_code <input_file>
@@ -586,6 +600,7 @@ if __name__ == "__main__":
     # --input_tables <input1>...<inputN>: the input tables
     # --pinyin_phrase: print pinyin phrase
     # --exclude_pinyin_phrase: exclude pinyin phrase
+    # --compare_code: compare code of standard chinese and pinyin
     # <input_file>: the input file
 
     parser = argparse.ArgumentParser()
@@ -594,8 +609,13 @@ if __name__ == "__main__":
     parser.add_argument("--input_tables", nargs='+', help="the input tables", default=None)
     parser.add_argument("--pinyin_phrase", help="print pinyin phrase", action="store_true")
     parser.add_argument("--exclude_pinyin_phrase", help="exclude pinyin phrase", action="store_true")
+    parser.add_argument("--compare_code", help="compare code of standard chinese and pinyin", action="store_true")
     parser.add_argument("input_file", nargs="?", help="the input file", default=None)
     args = parser.parse_args()
+
+    if args.compare_code:
+        compare_code()
+        sys.exit(0)
 
     print(get_header(args.name, args.input_tables), file=sys.stdout)
 
