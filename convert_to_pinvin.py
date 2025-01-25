@@ -260,6 +260,7 @@ CHINESE_CODE = "chinese_code.txt"
 PINYIN_CODE = "pinyin.txt"
 PINYIN_SIMP_DICT = "pinyin_simp.dict.txt"
 PINYIN_SIMP_EXT1_DICT = "pinyin_simp_ext1.dict.txt"
+PINYIN_PHRASE = "pinyin_phrase.txt"
 
 def get_postfix_mapping():
     mapping = dict()
@@ -382,16 +383,49 @@ def get_pinyin_code_from_file(file):
                 words[word].append(pinyin)
     return words
 
+# get pinyin phrase from a file with format "word: py1 py2 ..."
+# return a dictionary of word and a list of pinyin code sequences, e.g. {'word': [['py1', 'py2'], ['py3', 'py4']]}
+def get_pinyin_phrase_from_file(file):
+    words = dict()
+    with open(file , 'r') as f:
+        for line in f:
+            line = line.strip()
+            if len(line) == 0:
+                continue
+            if line[0] == '#':
+                continue
+            parts = re.split(r':\s+', line)
+            if len(parts) < 2:
+                continue
+            word = parts[0].strip()
+            pinyins = re.split(r'\s+', parts[1])
+            if word not in words:
+                words[word] = []
+            words[word].append(pinyins)
+    return words
+
+# get pinyin phrases
+def get_pinyin_phrases():
+    return get_pinyin_phrase_from_file(PINYIN_PHRASE)
+
+# get pinyin code of chinese characters
 def get_pinyin_code_of_chars():
-    return get_pinyin_code_from_file(PINYIN_CODE)
+    words = get_pinyin_code_from_file(PINYIN_CODE)
+    chinese_code = get_chinese_code(CHINESE_CODE)
+    for word in chinese_code:
+        if word not in words:
+            words[word] = chinese_code[word]
+        else:
+            for pinyin in chinese_code[word]:
+                if pinyin not in words[word]:
+                    words[word].append(pinyin)
+    return words
 
 # get chinese code by get_chinese_code
 # return a dictionary of word and a list of pinyin code sequences
 def get_code_of_chars_in_list():
-    #words = get_chinese_code(CHINESE_CODE)
-    words = get_pinyin_code_from_file(PINYIN_CODE)
+    words = get_pinyin_code_of_chars()
     for word in words:
-        # convert the pinyin to pinvin
         words[word] = [[pinyin] for pinyin in words[word]]
     return words
  
@@ -547,12 +581,16 @@ if __name__ == "__main__":
     # --chinese_code: print chinese code
     # --name <name>: the name of the output file
     # --input_tables <input1>...<inputN>: the input tables
+    # --pinyin_phrase: print pinyin phrase
+    # --exclude_pinyin_phrase: exclude pinyin phrase
     # <input_file>: the input file
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--chinese_code", help="print chinese code", action="store_true")
     parser.add_argument("--name", help="the name of the current table", required = True)
     parser.add_argument("--input_tables", nargs='+', help="the input tables", default=None)
+    parser.add_argument("--pinyin_phrase", help="print pinyin phrase", action="store_true")
+    parser.add_argument("--exclude_pinyin_phrase", help="exclude pinyin phrase", action="store_true")
     parser.add_argument("input_file", nargs="?", help="the input file", default=None)
     args = parser.parse_args()
 
@@ -566,5 +604,14 @@ if __name__ == "__main__":
     if args.input_file:
         words = get_words_from_file(args.input_file)
         word_codes = get_code_of_words(words)
+        if args.exclude_pinyin_phrase:
+            pinyin_phrases = get_pinyin_phrases()
+            for word in pinyin_phrases:
+                if word in word_codes:
+                    del word_codes[word]
         words_freq = get_frequency_from_file(PINYIN_SIMP_EXT1_DICT)
         print_word_codes(word_codes, words_freq)
+    elif args.pinyin_phrase:
+        pinyin_phrases = get_pinyin_phrases()
+        words_freq = get_frequency_from_file(PINYIN_SIMP_EXT1_DICT)
+        print_word_codes(pinyin_phrases, words_freq)
