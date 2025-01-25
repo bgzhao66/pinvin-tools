@@ -5,11 +5,14 @@ PRIMARY_NAME = pinvin_simp
 INPUT_TABLES = $(shell seq 2 7 | sed 's/.*/$(PRIMARY_NAME)_ext&/')
 
 .SILENT:
-all: primary_table extra_tables
+all: primary_table predef_table extra_tables
+	echo "All tables converted"
+
+primary_table:
 	echo "Converting to table $(PRIMARY_NAME)"
 	python3 ./convert_to_pinvin.py --chinese_code --name $(PRIMARY_NAME) --input_tables $(PRIMARY_NAME)_ext $(INPUT_TABLES) > $(PRIMARY_NAME).dict.yaml
 
-primary_table:
+predef_table:
 	echo "Converting to table $(PRIMARY_NAME)_ext"
 	python3 ./convert_to_pinvin.py --name $(PRIMARY_NAME)_ext --pinyin_phrase > $(PRIMARY_NAME)_ext.dict.yaml
 
