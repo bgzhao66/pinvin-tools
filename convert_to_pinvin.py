@@ -343,7 +343,7 @@ def get_toneless_pinyin_seq(pinyin_seq):
     return [get_toneless_pinyin(pinyin) for pinyin in pinyin_seq]
 
 # get chinese code from a file with format "pinyin: word1 word2 ..."
-def get_chinese_code(file):
+def get_standard_code_from_file(file):
     words = dict()
     # read the file line by line
     with open(file, 'r') as f:
@@ -414,17 +414,17 @@ def get_pinyin_phrases():
 # get pinyin code of chinese characters
 def get_pinyin_code_of_chars():
     words = get_pinyin_code_from_file(PINYIN_CODE)
-    chinese_code = get_chinese_code(STANDARD_CHINESE)
-    for word in chinese_code:
+    standard_code = get_standard_code_from_file(STANDARD_CHINESE)
+    for word in standard_code:
         if word not in words:
-            words[word] = chinese_code[word]
+            words[word] = standard_code[word]
         else:
-            for pinyin in chinese_code[word]:
+            for pinyin in standard_code[word]:
                 if pinyin not in words[word]:
                     words[word].append(pinyin)
     return words
 
-# get chinese code by get_chinese_code
+# get pinyin codes of characters
 # return a dictionary of word and a list of pinyin code sequences
 def get_code_of_chars_in_list():
     words = get_pinyin_code_of_chars()
