@@ -256,7 +256,7 @@ m̀ m
 ǜ v
 """
 
-CHINESE_CODE = "chinese_code.txt"
+STANDARD_CHINESE = "standard_chinese.txt"
 PINYIN_CODE = "pinyin.txt"
 PINYIN_SIMP_DICT = "pinyin_simp.dict.txt"
 PINYIN_SIMP_EXT1_DICT = "pinyin_simp_ext1.dict.txt"
@@ -411,7 +411,7 @@ def get_pinyin_phrases():
 # get pinyin code of chinese characters
 def get_pinyin_code_of_chars():
     words = get_pinyin_code_from_file(PINYIN_CODE)
-    chinese_code = get_chinese_code(CHINESE_CODE)
+    chinese_code = get_chinese_code(STANDARD_CHINESE)
     for word in chinese_code:
         if word not in words:
             words[word] = chinese_code[word]
