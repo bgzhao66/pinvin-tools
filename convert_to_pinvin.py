@@ -411,6 +411,30 @@ def get_pinyin_phrase_from_file(file):
 def get_pinyin_phrases():
     return get_pinyin_phrase_from_file(PINYIN_PHRASE)
 
+# check if the codes of a word is consistent with the code of characters, if not, return false; otherwise, return true
+# word: a list of characters, e.g. ['character1', 'character2']
+# word_code: a list of tonal pinyin code sequences, e.g. [['code1', 'code2'], ['code3', 'code4']]
+# char_codes: a dictionary of characters and a list of pinyin code sequences, e.g. {'character': ['code1', 'code2']}
+# Notes: a word is a list of characters, and the function should not use get_descartes_products
+def is_consistent(word, word_code, char_codes):
+    if len(word) != len(word_code):
+        return False
+    for i in range(len(word)):
+        if word[i] not in char_codes:
+            return False
+        if word_code[i] not in char_codes[word[i]]:
+            return False
+    return True
+
+# purge inconsistent phrases
+def purge_inconsistent_phrases(words):
+    char_codes = get_pinyin_code_of_chars()
+    for word in get_sorted_keys(words):
+        for pinyin_seq in words[word]:
+            if not is_consistent(word, pinyin_seq, char_codes):
+                del words[word]
+                break
+
 # get pinyin code of chinese characters
 def get_pinyin_code_of_chars():
     words = get_pinyin_code_from_file(PINYIN_CODE)
@@ -537,27 +561,6 @@ def print_word_codes(word_codes, words_freq, outfile=sys.stdout):
             freq = codes[code][word]
             print("%s\t%s\t%i" % (word, code, freq), file=outfile)
 
-# print the chinese code in the same way
-def print_chinese_code(char_codes, outfile=sys.stdout):
-    kWordsFreq = get_frequency_from_file(PINYIN_SIMP_DICT)
-    
-    codes = dict()
-    for word in char_codes:
-        for code in char_codes[word]:
-            if code not in codes:
-                codes[code] = []
-            codes[code].append(word)
-            if begin_with_vowel(code):
-                altcode = 'v' + code
-                if altcode not in codes:
-                    codes[altcode] = []
-                codes[altcode].append(word)
-    
-    for code in get_sorted_keys(codes):
-        for word in set(codes[code]):
-            freq = get_freq_of_word(word, kWordsFreq)
-            print("%s\t%s\t%i" % (word, code, freq), file=outfile)
-
 def get_header(name, input_tables):
     hdr = f"""# rime dictionary
 # encoding: utf-8
@@ -625,6 +628,7 @@ if __name__ == "__main__":
         word_codes = get_code_of_words(words)
         if args.exclude_pinyin_phrase:
             pinyin_phrases = get_pinyin_phrases()
+            purge_inconsistent_phrases(pinyin_phrases)
             for word in pinyin_phrases:
                 if word in word_codes:
                     del word_codes[word]
