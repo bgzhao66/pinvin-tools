@@ -544,14 +544,15 @@ def get_prepended_v_seqs(pinvin_seq):
 # print the word_codes which is a dictionary of key,list into a file with the format of word code frequency
 # word_codes: a dictionary of word and a list of tonal pinyin code sequences,
 #               e.g. {'word': [['code1', 'code2'], ['code3', 'code4']]}
-def print_word_codes(word_codes, words_freq, outfile=sys.stdout):
+def print_word_codes(word_codes, words_freq, fluent=True, outfile=sys.stdout):
     codes = dict()
     for word in word_codes:
         for pinyin_seq in word_codes[word]:
             toneless = ' '.join(get_toneless_pinyin_seq(pinyin_seq))
             freq = get_freq_of_word(word, toneless, words_freq)
             for pinvin_seq in get_prepended_v_seqs(get_pinvin_seq(pinyin_seq)):
-                code = ' '.join(pinvin_seq)
+                sep = ' ' if fluent else ''
+                code = sep.join(pinvin_seq)
                 if code not in codes:
                     codes[code] = dict()
                 codes[code][word] = freq
@@ -600,6 +601,7 @@ if __name__ == "__main__":
     # --pinyin_phrase: print pinyin phrase
     # --exclude_pinyin_phrase: exclude pinyin phrase
     # --compare_code: compare code of standard chinese and pinyin
+    # --fluent: whether to print in fluent mode
     # <input_file>: the input file
 
     parser = argparse.ArgumentParser()
@@ -609,6 +611,7 @@ if __name__ == "__main__":
     parser.add_argument("--pinyin_phrase", help="print pinyin phrase", action="store_true")
     parser.add_argument("--exclude_pinyin_phrase", help="exclude pinyin phrase", action="store_true")
     parser.add_argument("--compare_code", help="compare code of standard chinese and pinyin", action="store_true")
+    parser.add_argument("--fluent", help="whether to print in fluent mode", action="store_true")
     parser.add_argument("input_file", nargs="?", help="the input file", default=None)
     args = parser.parse_args()
 
@@ -633,8 +636,8 @@ if __name__ == "__main__":
                 if word in word_codes:
                     del word_codes[word]
         words_freq = get_frequency_from_file(PINYIN_SIMP_EXT1_DICT)
-        print_word_codes(word_codes, words_freq)
+        print_word_codes(word_codes, words_freq, fluent=args.fluent)
     elif args.pinyin_phrase:
         pinyin_phrases = get_pinyin_phrases()
         words_freq = get_frequency_from_file(PINYIN_SIMP_EXT1_DICT)
-        print_word_codes(pinyin_phrases, words_freq)
+        print_word_codes(pinyin_phrases, words_freq, fluent=args.fluent)
