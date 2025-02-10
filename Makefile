@@ -14,12 +14,12 @@ primary_table:
 
 predef_table:
 	echo "Converting to table $(PRIMARY_NAME)_ext"
-	python3 ./convert_to_pinvin.py --name $(PRIMARY_NAME)_ext --pinyin_phrase > $(PRIMARY_NAME)_ext.dict.yaml
+	python3 ./convert_to_pinvin.py --name $(PRIMARY_NAME)_ext --pinyin_phrase --fluent > $(PRIMARY_NAME)_ext.dict.yaml
 
 extra_tables:
 	for table in $(shell seq 2 7); do \
 		echo "Converting to table $(PRIMARY_NAME)_ext$${table}"; \
-		python3 ./convert_to_pinvin.py words_$${table}.txt --exclude_pinyin_phrase --name $(PRIMARY_NAME)_ext$${table}  > $(PRIMARY_NAME)_ext$${table}.dict.yaml; \
+		python3 ./convert_to_pinvin.py words_$${table}.txt --exclude_pinyin_phrase --fluent --name $(PRIMARY_NAME)_ext$${table}  > $(PRIMARY_NAME)_ext$${table}.dict.yaml; \
 	done
 
 .PHONY: clean
