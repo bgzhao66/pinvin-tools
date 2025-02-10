@@ -2,7 +2,10 @@
 # and the primary table 'pinvin_simp'
 
 PRIMARY_NAME = pinvin_simp
-INPUT_TABLES = $(shell seq 2 7 | sed 's/.*/$(PRIMARY_NAME)_ext&/')
+INDEXES = $(shell echo 234 567)
+# Loop over the indexes and generate the table names
+# The table names are the primary table name with the index appended
+INPUT_TABLES = $(foreach index,$(INDEXES),$(PRIMARY_NAME)_ext$(index))
 
 .SILENT:
 all: primary_table predef_table extra_tables
@@ -17,7 +20,7 @@ predef_table:
 	python3 ./convert_to_pinvin.py --name $(PRIMARY_NAME)_ext --pinyin_phrase --fluent > $(PRIMARY_NAME)_ext.dict.yaml
 
 extra_tables:
-	for table in $(shell seq 2 7); do \
+	for table in $(shell echo $(INDEXES)); do \
 		echo "Converting to table $(PRIMARY_NAME)_ext$${table}"; \
 		python3 ./convert_to_pinvin.py words_$${table}.txt --exclude_pinyin_phrase --fluent --name $(PRIMARY_NAME)_ext$${table}  > $(PRIMARY_NAME)_ext$${table}.dict.yaml; \
 	done
