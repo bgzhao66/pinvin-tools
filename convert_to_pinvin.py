@@ -547,20 +547,24 @@ def get_prepended_v_seqs(pinvin_seq):
 def print_word_codes(word_codes, words_freq, fluent=True, outfile=sys.stdout):
     codes = dict()
     for word in word_codes:
+        length = len(word)
         for pinyin_seq in word_codes[word]:
             toneless = ' '.join(get_toneless_pinyin_seq(pinyin_seq))
             freq = get_freq_of_word(word, toneless, words_freq)
             for pinvin_seq in get_prepended_v_seqs(get_pinvin_seq(pinyin_seq)):
                 sep = ' ' if fluent else ''
                 code = sep.join(pinvin_seq)
-                if code not in codes:
-                    codes[code] = dict()
-                codes[code][word] = freq
-    
-    for code in get_sorted_keys(codes):
-        for word in get_sorted_keys(codes[code]):
-            freq = codes[code][word]
-            print("%s\t%s\t%i" % (word, code, freq), file=outfile)
+                if length not in codes:
+                    codes[length] = dict()
+                if code not in codes[length]:
+                    codes[length][code] = dict()
+                codes[length][code][word] = freq
+
+    for length in get_sorted_keys(codes):
+        for code in get_sorted_keys(codes[length]):
+            for word in get_sorted_keys(codes[length][code]):
+                freq = codes[length][code][word]
+                print("%s\t%s\t%i" % (word, code, freq), file=outfile)
 
 def get_header(name, input_tables):
     hdr = f"""# rime dictionary
