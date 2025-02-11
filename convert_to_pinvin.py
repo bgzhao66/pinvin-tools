@@ -521,12 +521,12 @@ def get_frequency_from_file(file):
             freq[word][code] += int(frequency)
     return freq
 
-# get the frequency of a character from freq_dict with default value 1.
+# get the frequency of a character from freq_dict with default value 0.
 def get_freq_of_word(word, toneless_code, freq_dict):
     if word not in freq_dict:
-        return 1
+        return 0
     if toneless_code not in freq_dict[word]:
-        return 1
+        return 0
     return freq_dict[word][toneless_code]
 
 # get the sorted keys of a dictionary
