@@ -558,22 +558,27 @@ def get_prepended_v_seqs(pinvin_seq):
         res.append(['v' + pinvin_seq[0]] + pinvin_seq[1:])
     return res
 
-# Get the first character of the inconsistent words with its pinyin, with
-# output of a dictionary of pinyin and a dictionary of word and frequency,
-#   e.g. {'pinyin': {'word': frequency}}
-def get_inconsistent_initial_chars():
+# Get all the character in words with its inconsistent pinyin, with
+# output of a dictionary of pinyin and a dictionary of word
+#   e.g. {'pinyin': {'char': ['word1', 'word2']}}
+def get_inconsistent_chars():
     pinyin_phrases = get_pinyin_phrases()
-    inconsistent = get_inconsistent_phrases(pinyin_phrases, strict = False)
+    codes = get_pinyin_code_of_chars()
+    inconsistent = get_inconsistent_phrases(pinyin_phrases, strict = True)
     chars = dict()
     for word in inconsistent:
         for pinyin_seq in inconsistent[word]:
-            py = pinyin_seq[0]
-            if py not in chars:
-                chars[py] = dict()
-            ch = word[0]
-            if ch not in chars[py]:
-                chars[py][ch] = []
-            chars[py][ch].append(word)
+            for i in range(len(word)):
+                py = pinyin_seq[i]
+                ch = word[i]
+                if ch not in codes or py in codes[ch]:
+                    continue
+                # add the character to the inconsistent list
+                if py not in chars:
+                    chars[py] = dict()
+                if ch not in chars[py]:
+                    chars[py][ch] = []
+                chars[py][ch].append(word)
     return chars
 
 # print the word_codes which is a dictionary of key,list into a file with the format of word code frequency
@@ -602,12 +607,16 @@ def print_word_codes(word_codes, words_freq, fluent=True, outfile=sys.stdout):
                 print("%s\t%s\t%i" % (word, code, freq), file=outfile)
 
 def show_inconsistent_chars(type):
-    chars = get_inconsistent_initial_chars()
+    chars = get_inconsistent_chars()
+    pinyin_codes = get_pinyin_code_from_file(PINYIN_CODE)
     standard_codes = get_standard_code_from_file(STANDARD_CHINESE)
     for py in get_sorted_keys(chars):
         for ch in get_sorted_keys(chars[py]):
             if ch not in standard_codes:
                 print(ch, "Not found in standard", file=sys.stderr)
+                continue
+            if ch not in pinyin_codes or py not in pinyin_codes[ch]:
+                print(ch, py, "Not found in pinyin", file=sys.stderr)
                 continue
             if type == '0':
                 print(py, ": ",  ch, file=sys.stdout)
