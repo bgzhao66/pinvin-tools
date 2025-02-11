@@ -416,7 +416,7 @@ def get_pinyin_phrases():
 # word_code: a list of tonal pinyin code sequences, e.g. [['code1', 'code2'], ['code3', 'code4']]
 # char_codes: a dictionary of characters and a list of pinyin code sequences, e.g. {'character': ['code1', 'code2']}
 # Notes: a word is a list of characters, and the function should not use get_descartes_products
-def is_consistent(word, word_code, char_codes):
+def is_consistent(word, word_code, char_codes, strict=True):
     if len(word) != len(word_code):
         return False
     for i in range(len(word)):
@@ -424,16 +424,33 @@ def is_consistent(word, word_code, char_codes):
             return False
         if word_code[i] not in char_codes[word[i]]:
             return False
+        if not strict:
+            return True
     return True
 
 # purge inconsistent phrases
-def purge_inconsistent_phrases(words):
+def purge_inconsistent_phrases(words, strict=True):
     char_codes = get_pinyin_code_of_chars()
     for word in get_sorted_keys(words):
         for pinyin_seq in words[word]:
-            if not is_consistent(word, pinyin_seq, char_codes):
+            if not is_consistent(word, pinyin_seq, char_codes, strict = strict):
                 del words[word]
                 break
+
+# get inconsistent phrases, with input of a dictionary of word and a list of pinyin code sequences,
+#   e.g. {'word': [['code1', 'code2'], ['code3', 'code4']]}
+#  If strict is True, if any character of the word is not found in the char_codes, the word is inconsistent;
+#  otherwise, only when the first character is not found in the char_codes, the word is inconsistent.
+def get_inconsistent_phrases(words, strict=True):
+    char_codes = get_pinyin_code_of_chars()
+    inconsistent = dict()
+    for word in get_sorted_keys(words):
+        for pinyin_seq in words[word]:
+            if not is_consistent(word, pinyin_seq, char_codes, strict = strict):
+                if word not in inconsistent:
+                    inconsistent[word] = []
+                inconsistent[word].append(pinyin_seq)
+    return inconsistent
 
 # get pinyin code of chinese characters
 def get_pinyin_code_of_chars():
@@ -541,6 +558,24 @@ def get_prepended_v_seqs(pinvin_seq):
         res.append(['v' + pinvin_seq[0]] + pinvin_seq[1:])
     return res
 
+# Get the first character of the inconsistent words with its pinyin, with
+# output of a dictionary of pinyin and a dictionary of word and frequency,
+#   e.g. {'pinyin': {'word': frequency}}
+def get_inconsistent_initial_chars():
+    pinyin_phrases = get_pinyin_phrases()
+    inconsistent = get_inconsistent_phrases(pinyin_phrases, strict = False)
+    chars = dict()
+    for word in inconsistent:
+        for pinyin_seq in inconsistent[word]:
+            py = pinyin_seq[0]
+            if py not in chars:
+                chars[py] = dict()
+            ch = word[0]
+            if ch not in chars[py]:
+                chars[py][ch] = []
+            chars[py][ch].append(word)
+    return chars
+
 # print the word_codes which is a dictionary of key,list into a file with the format of word code frequency
 # word_codes: a dictionary of word and a list of tonal pinyin code sequences,
 #               e.g. {'word': [['code1', 'code2'], ['code3', 'code4']]}
@@ -604,16 +639,20 @@ if __name__ == "__main__":
     # --input_tables <input1>...<inputN>: the input tables
     # --pinyin_phrase: print pinyin phrase
     # --exclude_pinyin_phrase: exclude pinyin phrase
+    # --check_pinyin: check pinyin phrase
+    # --show_inconsistent: show inconsistent characters and words
     # --compare_code: compare code of standard chinese and pinyin
     # --fluent: whether to print in fluent mode
     # <input_file>: the input file
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--chinese_code", help="print chinese code", action="store_true")
-    parser.add_argument("--name", help="the name of the current table", required = True)
+    parser.add_argument("--name", help="the name of the current table", required = False)
     parser.add_argument("--input_tables", nargs='+', help="the input tables", default=None)
     parser.add_argument("--pinyin_phrase", help="print pinyin phrase", action="store_true")
     parser.add_argument("--exclude_pinyin_phrase", help="exclude pinyin phrase", action="store_true")
+    parser.add_argument("--check_pinyin", help="check pinyin phrase", action="store_true")
+    parser.add_argument("--show_inconsistent", help="show inconsistent characters and words", action="store_true")
     parser.add_argument("--compare_code", help="compare code of standard chinese and pinyin", action="store_true")
     parser.add_argument("--fluent", help="whether to print in fluent mode", action="store_true")
     parser.add_argument("input_file", nargs="?", help="the input file", default=None)
@@ -623,7 +662,8 @@ if __name__ == "__main__":
         compare_code()
         sys.exit(0)
 
-    print(get_header(args.name, args.input_tables), file=sys.stdout)
+    if not args.show_inconsistent:
+        print(get_header(args.name, args.input_tables), file=sys.stdout)
 
     if args.chinese_code:
         char_codes = get_code_of_chars_in_list()
@@ -643,5 +683,12 @@ if __name__ == "__main__":
         print_word_codes(word_codes, words_freq, fluent=args.fluent)
     elif args.pinyin_phrase:
         pinyin_phrases = get_pinyin_phrases()
+        if args.check_pinyin:
+            purge_inconsistent_phrases(pinyin_phrases, strict = False)
         words_freq = get_frequency_from_file(PINYIN_SIMP_EXT1_DICT)
         print_word_codes(pinyin_phrases, words_freq, fluent=args.fluent)
+    elif args.show_inconsistent:
+        chars = get_inconsistent_initial_chars()
+        for py in get_sorted_keys(chars):
+            for ch in get_sorted_keys(chars[py]):
+                print(py, ": ",  ch, "[", ", ".join(chars[py][ch]), "]" ,file=sys.stdout)
