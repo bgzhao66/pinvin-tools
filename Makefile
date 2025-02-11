@@ -1,7 +1,7 @@
 # generate a list of tables to be converted from prefix 'pinvin_simp_ext' and suffix '2' to '7'
 # and the primary table 'pinvin_simp'
 
-PRIMARY_NAME = pinvin_simp
+PRIMARY_NAME = pinvin_trad
 INDEXES = $(shell echo 234 567)
 # Loop over the indexes and generate the table names
 # The table names are the primary table name with the index appended

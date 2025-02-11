@@ -258,8 +258,8 @@ m̀ m
 
 STANDARD_CHINESE = "standard_chinese.txt"
 PINYIN_CODE = "pinyin.txt"
-PINYIN_SIMP_DICT = "pinyin_simp.dict.txt"
-PINYIN_SIMP_EXT1_DICT = "pinyin_simp_ext1.dict.txt"
+PINYIN_SIMP_DICT = "pinyin_trad.dict.txt"
+PINYIN_SIMP_EXT1_DICT = "pinyin_trad_ext1.dict.txt"
 PINYIN_PHRASE = "pinyin_phrase.txt"
 
 def get_postfix_mapping():
