@@ -601,6 +601,20 @@ def print_word_codes(word_codes, words_freq, fluent=True, outfile=sys.stdout):
                 freq = codes[length][code][word]
                 print("%s\t%s\t%i" % (word, code, freq), file=outfile)
 
+def show_inconsistent_chars(type):
+    chars = get_inconsistent_initial_chars()
+    standard_codes = get_standard_code_from_file(STANDARD_CHINESE)
+    for py in get_sorted_keys(chars):
+        for ch in get_sorted_keys(chars[py]):
+            if ch not in standard_codes:
+                print(ch, "Not found in standard", file=sys.stderr)
+                continue
+            if type == '0':
+                print(py, ": ",  ch, file=sys.stdout)
+            else:
+                for word in chars[py][ch]:
+                    print(word, file=sys.stdout)
+
 def get_header(name, input_tables):
     hdr = f"""# rime dictionary
 # encoding: utf-8
@@ -640,7 +654,7 @@ if __name__ == "__main__":
     # --pinyin_phrase: print pinyin phrase
     # --exclude_pinyin_phrase: exclude pinyin phrase
     # --check_pinyin: check pinyin phrase
-    # --show_inconsistent: show inconsistent characters and words
+    # --show_inconsistent <type>: show inconsistent characters and words, with 0 for characters, otherwise for words
     # --compare_code: compare code of standard chinese and pinyin
     # --fluent: whether to print in fluent mode
     # <input_file>: the input file
@@ -652,7 +666,7 @@ if __name__ == "__main__":
     parser.add_argument("--pinyin_phrase", help="print pinyin phrase", action="store_true")
     parser.add_argument("--exclude_pinyin_phrase", help="exclude pinyin phrase", action="store_true")
     parser.add_argument("--check_pinyin", help="check pinyin phrase", action="store_true")
-    parser.add_argument("--show_inconsistent", help="show inconsistent characters and words", action="store_true")
+    parser.add_argument("--show_inconsistent", nargs='?', help="show inconsistent characters and words", default=None)
     parser.add_argument("--compare_code", help="compare code of standard chinese and pinyin", action="store_true")
     parser.add_argument("--fluent", help="whether to print in fluent mode", action="store_true")
     parser.add_argument("input_file", nargs="?", help="the input file", default=None)
@@ -688,7 +702,5 @@ if __name__ == "__main__":
         words_freq = get_frequency_from_file(PINYIN_SIMP_EXT1_DICT)
         print_word_codes(pinyin_phrases, words_freq, fluent=args.fluent)
     elif args.show_inconsistent:
-        chars = get_inconsistent_initial_chars()
-        for py in get_sorted_keys(chars):
-            for ch in get_sorted_keys(chars[py]):
-                print(py, ": ",  ch, "[", ", ".join(chars[py][ch]), "]" ,file=sys.stdout)
+        type = args.show_inconsistent
+        show_inconsistent_chars(type)
