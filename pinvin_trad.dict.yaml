@@ -11293,7 +11293,6 @@ import_tables:
 袼	ge	4
 謌	ge	7
 鎶	ge	0
-閤	ge	4
 餎	ge	0
 饹	ge	0
 鴐	ge	0
@@ -13505,6 +13504,7 @@ import_tables:
 鉌	her	3
 鑉	her	0
 閡	her	29
+閤	her	0
 闔	her	56
 阂	her	0
 阖	her	0
@@ -13682,6 +13682,7 @@ import_tables:
 轟	hong	589
 轰	hong	0
 鍧	hong	10
+鬨	hong	0
 𠐿	hong	0
 𠹅	hong	0
 𢝁	hong	0
@@ -13714,6 +13715,7 @@ import_tables:
 嗊	hoong	1
 愩	hoong	5
 晎	hoong	0
+鬨	hoong	0
 𢗵	hoong	0
 𢦅	hoong	0
 𢼦	hoong	0
@@ -17093,6 +17095,7 @@ import_tables:
 堙	in	8
 姻	in	30
 婣	in	0
+廕	in	5
 愔	in	14
 慇	in	0
 栶	in	0
@@ -19553,6 +19556,7 @@ import_tables:
 跡	jih	527
 跽	jih	4
 踑	jih	0
+蹟	jih	1
 迹	jih	0
 际	jih	0
 際	jih	456
@@ -30824,7 +30828,6 @@ import_tables:
 擈	pu	0
 攴	pu	0
 攵	pu	0
-朴	pu	0
 柨	pu	0
 潽	pu	3
 炇	pu	0
@@ -30921,7 +30924,6 @@ import_tables:
 埔	pwu	102
 普	pwu	2269
 暜	pwu	0
-朴	pwu	0
 樸	pwu	444
 檏	pwu	0
 氆	pwu	14
@@ -44175,6 +44177,7 @@ import_tables:
 堙	vin	8
 姻	vin	30
 婣	vin	0
+廕	vin	5
 愔	vin	14
 慇	vin	0
 栶	vin	0
@@ -48682,7 +48685,6 @@ import_tables:
 闂	xiamg	0
 項	xiamg	4689
 项	xiamg	0
-鬨	xiamg	1
 鱌	xiamg	1
 𢄵	xiamg	0
 𢛖	xiamg	0
