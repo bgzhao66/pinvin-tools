@@ -414,6 +414,22 @@ def get_pinyin_phrases():
 kPinyinCodes = get_pinyin_code_from_file(PINYIN_CODE)
 kStandardCodes = get_standard_code_from_file(STANDARD_CHINESE)
 
+# Merge kStandardCodes and kPinyinCodes, then return the new dictionary
+def merge_codes():
+    codes = dict()
+    for word in kStandardCodes:
+        codes[word] = kStandardCodes[word]
+    for word in kPinyinCodes:
+        if word not in codes:
+            codes[word] = kPinyinCodes[word]
+        else:
+            for pinyin in kPinyinCodes[word]:
+                if pinyin not in codes[word]:
+                    codes[word].append(pinyin)
+    return codes
+
+kMergedCodes = merge_codes()
+
 # check if the codes of a word is consistent with the code of characters, if not, return false; otherwise, return true
 # word: a list of characters, e.g. ['character1', 'character2']
 # word_code: a list of tonal pinyin code sequences, e.g. [['code1', 'code2'], ['code3', 'code4']]
@@ -428,9 +444,8 @@ def is_consistent(word, word_code, char_codes, strict=True):
         if strict and word_code[i] not in char_codes[word[i]]:
             return False
         if not strict:
-            if word_code[i] not in kPinyinCodes[word[i]]:
-                if not (word[i] in kStandardCodes and word_code[i] in kStandardCodes[word[i]]):
-                    return False
+            if word_code[i] not in kMergedCodes[word[i]]:
+                return False
             return True
     return True
 
@@ -615,6 +630,7 @@ def print_word_codes(word_codes, words_freq, fluent=True, outfile=sys.stdout):
 def show_inconsistent_chars(type):
     chars = get_inconsistent_chars()
     pinyin_codes = get_pinyin_code_from_file(PINYIN_CODE)
+    print("#")
     for py in get_sorted_keys(chars):
         for ch in get_sorted_keys(chars[py]):
             if ch not in pinyin_codes:
