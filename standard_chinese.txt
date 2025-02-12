@@ -1733,3 +1733,26 @@ er : 兒
 zi : 子
 jì : 騎
 shèng : 乘
+#
+biè : 彆
+bēi : 揹
+cháng : 嚐
+chōng : 沖
+fà : 髮
+fǎ : 髮
+hé : 閤
+gé : 閤
+hōng : 鬨
+hǒng : 鬨
+hòng : 鬨
+jì : 蹟
+jī : 蹟
+méng : 濛
+piáo : 朴
+pò : 朴
+pō : 朴
+shě : 捨
+xū : 鬚
+yàn : 嚥
+yīn : 廕
+yìn : 廕
