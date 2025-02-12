@@ -637,10 +637,13 @@ def show_inconsistent_chars(type):
                 print(ch, ": Not found in pinyin", file=sys.stderr)
                 continue
             if type == '0': # in pinyin codes format
-                print("UNICODE: ", py, " # ",  ch, file=sys.stdout)
+                print("UNICODE: ", py, "#",  ch, file=sys.stdout)
             elif type == '1': # in standard codes format
                 if ch not in kStandardCodes:
-                    print(py,": ", ch, "Not found in standard", file=sys.stderr)
+                    print("#", ch, "Not found in standard", file=sys.stderr)
+                    print("#", py, ":", ch, file=sys.stderr)
+                    for py in pinyin_codes[ch]:
+                        print(py, ":", ch, file=sys.stderr)
                     continue
                 print(py,": ", ch, file=sys.stdout)
             else: # in words format
