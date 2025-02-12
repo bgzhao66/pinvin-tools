@@ -41923,6 +41923,7 @@ U+32385: chì  # 𲎅
 U+32386: tóng  # 𲎆
 U+32388: méng  # 𲎈
 U+32389: mò  # 𲎉
+#
 UNICODE:  ai  #  衰
 UNICODE:  an  #  安
 UNICODE:  ang  #  昂
@@ -42435,3 +42436,25 @@ UNICODE:  ér  #  耳
 UNICODE:  ēi  #  工
 UNICODE:  ēi  #  誒
 UNICODE:  ě  #  耳
+#
+UNICODE:  bié # 彆
+UNICODE:  bèi # 揹
+UNICODE:  chòng # 沖
+UNICODE:  dǎn # 擔
+UNICODE:  fā # 髮
+UNICODE:  jiē # 擔
+UNICODE:  jí # 詰
+UNICODE:  jī # 蟣
+UNICODE:  kāng # 閌
+UNICODE:  le # 瞭
+UNICODE:  láng # 閬
+UNICODE:  líng # 嶺
+UNICODE:  mèi # 謎
+UNICODE:  mēng # 濛
+UNICODE:  pú # 朴
+UNICODE:  qǔ # 麴
+UNICODE:  shè # 捨
+UNICODE:  tuō # 梲
+UNICODE:  xùn # 燻
+UNICODE:  xī # 臘
+UNICODE:  yān # 嚥
