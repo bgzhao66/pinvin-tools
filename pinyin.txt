@@ -42213,7 +42213,6 @@ UNICODE:  qing  #  请
 UNICODE:  qing  #  轻
 UNICODE:  qing  #  青
 UNICODE:  qiu  #  囚
-UNICODE:  qián  #  干
 UNICODE:  qiāng  #  鸧
 UNICODE:  qu  #  倾
 UNICODE:  qu  #  取
