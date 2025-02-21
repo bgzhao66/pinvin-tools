@@ -16,7 +16,7 @@ def filter_dedider(file):
     with open(file) as f:
         for line in f:
             line = line.strip()
-            if re.match(r'.+地: .*de\s*$', line) or re.match(r'.+得: .*de\s*$', line):
+            if re.match(r'.+地: .*de\s*$', line) or re.match(r'.+得: .*de\s*$', line) or re.match(r'.+的: .*di\s*$', line):
                 continue
             print(line)
 
