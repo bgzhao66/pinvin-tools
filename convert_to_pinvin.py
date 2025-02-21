@@ -473,13 +473,27 @@ def get_inconsistent_phrases(words, strict=True):
                 inconsistent[word].append(pinyin_seq)
     return inconsistent
 
+# remove 'de' from codes
+def remove_from(codes, to_remove):
+    new_codes = []
+    for code in codes:
+        if code != to_remove:
+            new_codes.append(code)
+    return new_codes
+
 # get pinyin code of chinese characters
-def get_pinyin_code_of_chars():
+def get_pinyin_code_of_chars(reviseDe = False):
     words = get_pinyin_code_from_file(PINYIN_CODE)
     standard_code = get_standard_code_from_file(STANDARD_CHINESE)
     # prefer the standard code if different
     for word in standard_code:
         words[word] = standard_code[word]
+        if not reviseDe:
+            continue
+        if (word == '地' or word == '得'):
+            words[word] = remove_from(words[word], 'de')
+        elif (word == '的'):
+            words[word] = remove_from(words[word], 'di')
     return words
 
 # get pinyin codes of characters
@@ -527,7 +541,7 @@ def get_descartes_products(encodes):
 # get the pinyin code of words from a list of words
 # return a dictionary of word and a list of tonal pinyin code sequences
 def get_code_of_words(words: list) -> dict:
-    char_codes = get_pinyin_code_of_chars()
+    char_codes = get_pinyin_code_of_chars(reviseDe = True)
     word_codes = dict()
     for word in words:
         word_codes[word] = []
