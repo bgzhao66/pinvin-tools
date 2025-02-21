@@ -473,11 +473,11 @@ def get_inconsistent_phrases(words, strict=True):
                 inconsistent[word].append(pinyin_seq)
     return inconsistent
 
-# remove 'de' from codes
+# remove from codes
 def remove_from(codes, to_remove):
     new_codes = []
     for code in codes:
-        if code != to_remove:
+        if code not in to_remove:
             new_codes.append(code)
     return new_codes
 
@@ -491,9 +491,9 @@ def get_pinyin_code_of_chars(reviseDe = False):
         if not reviseDe:
             continue
         if (word == '地' or word == '得'):
-            words[word] = remove_from(words[word], 'de')
+            words[word] = remove_from(words[word], ['de'])
         elif (word == '的'):
-            words[word] = remove_from(words[word], 'di')
+            words[word] = remove_from(words[word], ['di', 'dī'])
     return words
 
 # get pinyin codes of characters
