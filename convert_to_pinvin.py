@@ -2,6 +2,7 @@ import sys
 import os
 import re
 import argparse
+import copy
 
 # define constants for post-fixes
 POSTFIX_MAPPING = """
@@ -418,10 +419,10 @@ kStandardCodes = get_standard_code_from_file(STANDARD_CHINESE)
 def merge_codes():
     codes = dict()
     for word in kStandardCodes:
-        codes[word] = kStandardCodes[word]
+        codes[word] = copy.deepcopy(kStandardCodes[word])
     for word in kPinyinCodes:
         if word not in codes:
-            codes[word] = kPinyinCodes[word]
+            codes[word] = copy.deepcopy(kPinyinCodes[word])
         else:
             for pinyin in kPinyinCodes[word]:
                 if pinyin not in codes[word]:
@@ -641,13 +642,38 @@ def print_word_codes(word_codes, words_freq, fluent=True, outfile=sys.stdout):
                 freq = codes[length][code][word]
                 print("%s\t%s\t%i" % (word, code, freq), file=outfile)
 
+def show_discrepencies_from_standard():
+    diffs = dict()
+    for ch in kStandardCodes:
+        pys = copy.deepcopy(kPinyinCodes[ch])
+        for py in kStandardCodes[ch]:
+            if py in pys:
+                pys.remove(py)
+        if len(pys) == 0:
+            continue
+        for py in pys:
+            toneless = get_toneless_pinyin(py)
+            if toneless not in diffs:
+                diffs[toneless] = dict()
+            if py not in diffs[toneless]:
+                diffs[toneless][py] = []
+            diffs[toneless][py].append(ch)
+
+    for toneless in get_sorted_keys(diffs):
+        print("#", toneless, file=sys.stdout)
+        for py in get_sorted_keys(diffs[toneless]):
+            print(py,":", ", ".join(diffs[toneless][py]), file=sys.stdout)
+
 def show_inconsistent_chars(type):
+    if type == '3':
+        show_discrepencies_from_standard()
+        return
+
     chars = get_inconsistent_chars()
-    pinyin_codes = get_pinyin_code_from_file(PINYIN_CODE)
     print("#")
     for py in get_sorted_keys(chars):
         for ch in get_sorted_keys(chars[py]):
-            if ch not in pinyin_codes:
+            if ch not in kPinyinCodes:
                 print(ch, ": Not found in pinyin", file=sys.stderr)
                 continue
             if type == '0': # in pinyin codes format
@@ -656,11 +682,11 @@ def show_inconsistent_chars(type):
                 if ch not in kStandardCodes:
                     print("#", ch, "Not found in standard", file=sys.stderr)
                     print("#", py, ":", ch, file=sys.stderr)
-                    for py in pinyin_codes[ch]:
+                    for py in kPinyinCodes[ch]:
                         print(py, ":", ch, file=sys.stderr)
                     continue
                 print(py,": ", ch, file=sys.stdout)
-            else: # in words format
+            elif type == '2': # in words format
                 for word in chars[py][ch]:
                     print(word, file=sys.stdout)
 
