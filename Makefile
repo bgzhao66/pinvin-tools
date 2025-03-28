@@ -2,7 +2,7 @@
 # and the primary table 'pinvin_simp'
 
 PRIMARY_NAME = pinvin_trad
-INDEXES = $(shell echo 234 567)
+INDEXES = $(shell echo A B)
 # Loop over the indexes and generate the table names
 # The table names are the primary table name with the index appended
 INPUT_TABLES = $(foreach index,$(INDEXES),$(PRIMARY_NAME)_ext$(index))
