@@ -3,6 +3,7 @@ import os
 import re
 import argparse
 import copy
+import unicodedata
 
 # define constants for post-fixes
 POSTFIX_MAPPING = """
@@ -690,6 +691,80 @@ def show_inconsistent_chars(type):
                 for word in chars[py][ch]:
                     print(word, file=sys.stdout)
 
+def is_punctuation(ch):
+    if len(ch) == 0:
+        return False
+    return unicodedata.category(ch[0]).startswith('P')
+
+kUnicodePunctMaps = {
+    ord("，"): ",",
+    ord("。"): ".",
+    ord("；"): ";",
+    ord("："): ":",
+    ord("！"): "!",
+    ord("？"): "?",
+    ord("“"): "\"",
+    ord("”"): "\"",
+    ord("‘"): "'",
+    ord("’"): "'",
+    ord("（"): "(",
+    ord("）"): ")",
+    ord("【"): "[",
+    ord("】"): "]",
+    ord("《"): "<",
+    ord("》"): ">",
+    ord("、"): ",",
+    ord("—"): "-",
+    ord("…"): "...",
+    ord("·"): ".",
+    ord("～"): "~",
+    ord("『"): "[",
+    ord("』"): "]",
+    ord("「"): "[",
+    ord("」"): "]",
+}
+kPeriods = ['。', '！', '？', '：', '.', '!', '?', ':']
+def is_period(ch):
+    if len(ch) == 0:
+        return False
+    return ch[0] in kPeriods
+
+def convert_text(text, userdict=None):
+    import jieba
+    from pypinyin import pinyin, Style
+    from itertools import chain
+
+    if userdict:
+        jieba.load_userdict(userdict)
+
+# 使用 jieba 分词
+    words = jieba.lcut(text)
+
+# 使用 pypinyin 为每个词注音（带调号）
+    pinyins = []
+    for word in words:
+        pys = pinyin(word, style=Style.TONE, strict=False)
+        pinyins.append(list(chain.from_iterable(pys)))
+
+    is_start = True
+    for py in pinyins:
+        if len(py) == 0:
+            continue
+        if is_punctuation(py[0]):
+            py[0] = py[0].translate(kUnicodePunctMaps)
+        pinvins = get_pinvin_seq(py)
+        if is_start:
+            cap = pinvins[0].capitalize()
+            pinvins[0] = cap
+            if len(cap) > 0 and cap[0].isalnum():
+                is_start = False
+        elif is_period(pinvins[-1]):
+            is_start = True
+        if not is_punctuation(pinvins[0]):
+            sys.stdout.write(' ')
+        sys.stdout.write(''.join(pinvins))
+    sys.stdout.write('\n')
+
 def get_header(name, input_tables):
     hdr = f"""# rime dictionary
 # encoding: utf-8
@@ -744,6 +819,8 @@ if __name__ == "__main__":
     parser.add_argument("--show_inconsistent", nargs='?', help="show inconsistent characters and words", default=None)
     parser.add_argument("--compare_code", help="compare code of standard chinese and pinyin", action="store_true")
     parser.add_argument("--fluent", help="whether to print in fluent mode", action="store_true")
+    parser.add_argument("--text", nargs="?", help="the text to be converted", default=None)
+    parser.add_argument("--userdict", nargs="?", help="the user dictionary for jieba", default=None)
     parser.add_argument("input_file", nargs="?", help="the input file", default=None)
     args = parser.parse_args()
 
@@ -751,7 +828,7 @@ if __name__ == "__main__":
         compare_code()
         sys.exit(0)
 
-    if not args.show_inconsistent:
+    if not args.show_inconsistent and not args.text:
         print(get_header(args.name, args.input_tables), file=sys.stdout)
 
     if args.chinese_code:
@@ -770,6 +847,11 @@ if __name__ == "__main__":
                     del word_codes[word]
         words_freq = get_frequency_from_file(PINYIN_SIMP_EXT1_DICT)
         print_word_codes(word_codes, words_freq, fluent=args.fluent)
+    elif args.text:
+        text = ""
+        for line in open(args.text, 'r'):
+            text += line
+        convert_text(text, args.userdict)
     elif args.pinyin_phrase:
         pinyin_phrases = get_pinyin_phrases()
         if args.check_pinyin:
