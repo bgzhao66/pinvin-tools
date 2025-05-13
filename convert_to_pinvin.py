@@ -729,6 +729,11 @@ def is_period(ch):
         return False
     return ch[0] in kPeriods
 
+def is_ascii(ch):
+    if len(ch) == 0:
+        return False
+    return all(c.isascii() for c in ch)
+
 def convert_text(text, userdict=None):
     import jieba
     from pypinyin import pinyin, Style
@@ -741,28 +746,31 @@ def convert_text(text, userdict=None):
     words = jieba.lcut(text)
 
 # 使用 pypinyin 为每个词注音（带调号）
-    pinyins = []
+    pinvins = []
     for word in words:
+        if is_ascii(word):
+            pinvins.append([word])
+            continue
         pys = pinyin(word, style=Style.TONE, strict=False)
-        pinyins.append(list(chain.from_iterable(pys)))
+        pvs = get_pinvin_seq(list(chain.from_iterable(pys)))
+        pinvins.append(pvs)
 
     is_start = True
-    for py in pinyins:
-        if len(py) == 0:
+    for pvs in pinvins:
+        if len(pvs) == 0:
             continue
-        if is_punctuation(py[0]):
-            py[0] = py[0].translate(kUnicodePunctMaps)
-        pinvins = get_pinvin_seq(py)
+        if is_punctuation(pvs[0]):
+            pvs[0] = pvs[0].translate(kUnicodePunctMaps)
         if is_start:
-            cap = pinvins[0].capitalize()
-            pinvins[0] = cap
-            if len(cap) > 0 and cap[0].isalnum():
+            cap = pvs[0].capitalize()
+            pvs[0] = cap
+            if len(cap) > 0 and cap[0].isupper():
                 is_start = False
-        elif is_period(pinvins[-1]):
+        elif is_period(pvs[-1]):
             is_start = True
-        if not is_punctuation(pinvins[0]):
+        if not is_punctuation(pvs[0]):
             sys.stdout.write(' ')
-        sys.stdout.write(''.join(pinvins))
+        sys.stdout.write(''.join(pvs))
     sys.stdout.write('\n')
 
 def get_header(name, input_tables):
