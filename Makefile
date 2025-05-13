@@ -25,6 +25,11 @@ extra_tables:
 		python3 ./convert_to_pinvin.py words_$${table}.txt --exclude_pinyin_phrase --fluent --name $(PRIMARY_NAME)_ext$${table}  > $(PRIMARY_NAME)_ext$${table}.dict.yaml; \
 	done
 
+dict:
+	mkdir -p txt
+	cat pinvin_*.dict.yaml | awk -F"\t" '{print $$2"\t"$$1"\t"$$3}' | sed 's/ //g' | grep -v '^\s' > txt/dict.txt
+	@echo "Dictionary txt/dict.txt generated"
+
 .PHONY: clean
 clean:
 	rm -f $(PRIMARY_NAME).dict.yaml $(PRIMARY_NAME)_ext*.dict.yaml
