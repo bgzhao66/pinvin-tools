@@ -28,7 +28,7 @@ extra_tables:
 dict:
 	mkdir -p txt
 	cat pinvin_*.dict.yaml | awk -F"\t" '{print $$2"\t"$$1"\t"$$3}' | sed 's/ //g' | grep -v '^\s' > txt/dict.txt
-	@echo "Dictionary txt/dict.txt generated"
+	python3 ./convert_to_chinese.py --import_data txt/dict.txt
 
 .PHONY: clean
 clean:
