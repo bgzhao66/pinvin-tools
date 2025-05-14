@@ -85,6 +85,7 @@ def decode_pinyin_path(pinyin_list, route, pinyin_to_words):
     N = len(pinyin_list)
     result = []
     idx = 0
+    after_matched = True
     while idx < N:
         # 如果当前是标点符号，直接保留
         if not pinyin_list[idx][0].isalpha():
@@ -96,8 +97,11 @@ def decode_pinyin_path(pinyin_list, route, pinyin_to_words):
         if word_pinyin_seg in pinyin_to_words:
             best_word = max(pinyin_to_words[word_pinyin_seg], key=lambda x: x[1])[0]
             result.append(best_word)
+            after_matched = True
         else:
+            result.append('' if after_matched else ' ')
             result.append(' '.join(pinyin_list[idx:next_idx]))  # 保留原始大小写
+            after_matched = False
         idx = next_idx
     return result
 
