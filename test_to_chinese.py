@@ -9,14 +9,13 @@ logging.basicConfig(stream=sys.stderr, level=logging.DEBUG, format='%(asctime)s 
 
 class TestConvertToChinese(unittest.TestCase):
     def setUp(self):
+        logging.info("test setUp.")
         self.db = ct.DB("txt/dict.db")
-        self.db.load_dict()
-        self.searcher = ct.DAGViterbiSearcher(self.db.pinyin_to_words, self.db.total_freq)
-        logging.info("Database loaded successfully.")
+        self.searcher = ct.DAGViterbiSearcher(self.db)
 
     def tearDown(self):
         self.db.close()
-        logging.info("Database closed successfully.")
+        logging.info("test tearDown.")
 
     def test_split_pinyin(self):
         testcases = [
