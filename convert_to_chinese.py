@@ -3,6 +3,7 @@ import math
 import unicodedata
 import argparse
 import re
+import logging
 
 # 英文标点转中文标点
 PUNCTUATION_MAP = {
@@ -127,6 +128,23 @@ def split_pinyin_and_punct(text):
         tokens.extend(current_token.strip().split())
     return tokens
 
+class DB:
+    def __init__(self, path):
+        self.path = path
+        self.pinyin_to_words = defaultdict(list)
+        self.word_freq = {}
+        self.total_freq = 0
+
+    # 读取词典文件，格式：<pinyin>\t<word>\t<freq>
+    def load_dict(self):
+        with open(self.path, 'r', encoding='utf-8') as f:
+            for line in f:
+                py, word, freq = line.strip().split('\t')
+                freq = int(freq)
+                self.pinyin_to_words[py.lower()].append((word, freq))
+                self.word_freq[word] = freq
+        self.total_freq = sum(freq + 1 for freq in self.word_freq.values())
+
 # 读取词典文件，格式：<pinyin>\t<word>\t<freq>
 def load_dict(path):
     pinyin_to_words = defaultdict(list)
@@ -139,81 +157,84 @@ def load_dict(path):
             word_freq[word] = freq
     return pinyin_to_words, word_freq
 
-# 构造 DAG
-def create_dag(pinyin_list, pinyin_to_words):
-    N = len(pinyin_list)
-    dag = defaultdict(list)
-    for i in range(N):
-        for j in range(i + 1, N + 1):
-            seg = ''.join(p.lower() for p in pinyin_list[i:j])
-            if seg in pinyin_to_words:
-                dag[i].append(j)
-        if not dag[i]:
-            dag[i].append(i + 1)  # 无匹配时，按单个拼音前进
-    return dag
+class DAGViterbiSearcher:
+    def __init__(self, pinyin_to_words, total_freq):
+        self.pinyin_to_words = pinyin_to_words
+        self.total_freq = total_freq
 
-# Viterbi 计算最优路径
-def calc_route(pinyin_list, dag, pinyin_to_words, total_freq):
-    N = len(pinyin_list)
-    route = {N: (0, 0)}
-    for i in range(N - 1, -1, -1):
-        candidates = []
-        for j in dag[i]:
-            seg = ''.join(p.lower() for p in pinyin_list[i:j])
-            if seg in pinyin_to_words:
-                prob = max(math.log((freq + 1) / total_freq) for word, freq in pinyin_to_words[seg])
+    # 创建 DAG
+    def create_dag(self, pinyin_list):
+        N = len(pinyin_list)
+        dag = defaultdict(list)
+        for i in range(N):
+            for j in range(i + 1, N + 1):
+                seg = ''.join(p.lower() for p in pinyin_list[i:j])
+                if seg in self.pinyin_to_words:
+                    dag[i].append(j)
+            if not dag[i]:
+                dag[i].append(i + 1)  # 无匹配时，按单个拼音前进
+        return dag
+
+    # Viterbi 计算最优路径
+    def calc_route(self, pinyin_list, dag):
+        N = len(pinyin_list)
+        route = {N: (0, 0)}
+        for i in range(N - 1, -1, -1):
+            candidates = []
+            for j in dag[i]:
+                seg = ''.join(p.lower() for p in pinyin_list[i:j])
+                if seg in self.pinyin_to_words:
+                    prob = max(math.log((freq + 1) / self.total_freq) for word, freq in self.pinyin_to_words[seg])
+                else:
+                    prob = math.log(1 / self.total_freq) * (j - i) # 惩罚未知拼音组合
+                candidates.append((prob + route[j][0], j))
+            route[i] = max(candidates)
+        return route
+
+    # 回溯路径并生成汉字或原始拼音输出
+    def decode_pinyin_path(self, pinyin_list, route,  within_deepsearch=False):
+        N = len(pinyin_list)
+        result = []
+        idx = 0
+        while idx < N:
+            # 如果当前是标点符号，直接保留
+            if not pinyin_list[idx][0].isalpha():
+                result.append(pinyin_list[idx])
+                idx += 1
+                continue
+            next_idx = route[idx][1]
+            word_pinyin_seg = ''.join(p.lower() for p in pinyin_list[idx:next_idx])
+            if word_pinyin_seg in self.pinyin_to_words:
+                best_word = max(self.pinyin_to_words[word_pinyin_seg], key=lambda x: x[1])[0]
+                result.append(best_word)
             else:
-                prob = math.log(1 / total_freq) * (j - i) # 惩罚未知拼音组合
-            candidates.append((prob + route[j][0], j))
-        route[i] = max(candidates)
-    return route
+                if within_deepsearch:
+                    return []  # 深度搜索失败
+                unmatched_list = pinyin_list[idx:next_idx]
+                sub_result = self.search_onceagain_with_segment(unmatched_list)
+                result.extend(sub_result)
+            idx = next_idx
+        return result
 
-# 尝试分割未知拼音, 並且通過DAG—Viterbi算法檢索最佳匹配, 如果成功返回結果, 否則返回原始拼音
-def search_pinyin_path_with_segment(unmatched_list, pinyin_to_words, total_freq):
-    pinyin_list = []
-    for token in unmatched_list:
-        syllables = try_split_tosyllables(token)
-        if not syllables:
-            return unmatched_list  # 无法分割
-        pinyin_list.extend(syllables)
+    # 尝试分割未知拼音, 并且通过DAG—Viterbi算法检索最佳匹配, 如果成功返回结果, 否则返回原始拼音
+    def search_onceagain_with_segment(self, unmatched_list):
+        pinyin_list = []
+        for token in unmatched_list:
+            syllables = try_split_tosyllables(token)
+            if not syllables:
+                return unmatched_list # 无法分割
+            pinyin_list.extend(syllables)
 
-    dag = create_dag(pinyin_list, pinyin_to_words)
-    route = calc_route(pinyin_list, dag, pinyin_to_words, total_freq)
-    result = decode_pinyin_path(pinyin_list, route, pinyin_to_words, total_freq, depth=1)
+        result = self.search(pinyin_list, within_deepsearch=True)
+        # 如果在深度搜索中没有找到匹配的词，返回原始拼音
+        return result if result else unmatched_list
 
-    # 如果在深度搜索中没有找到匹配的词，返回原始拼音
-    return result if result else unmatched_list
-
-# 回溯路径并生成汉字或原始拼音输出
-def decode_pinyin_path(pinyin_list, route, pinyin_to_words, total_freq, depth=0):
-    N = len(pinyin_list)
-    result = []
-    idx = 0
-    while idx < N:
-        # 如果当前是标点符号，直接保留
-        if not pinyin_list[idx][0].isalpha():
-            result.append(pinyin_list[idx])
-            idx += 1
-            continue
-        next_idx = route[idx][1]
-        word_pinyin_seg = ''.join(p.lower() for p in pinyin_list[idx:next_idx])
-        if word_pinyin_seg in pinyin_to_words:
-            best_word = max(pinyin_to_words[word_pinyin_seg], key=lambda x: x[1])[0]
-            result.append(best_word)
-        elif depth == 0:
-            # 如果没有找到匹配的词，尝试分割
-            unmatched_list = pinyin_list[idx:next_idx]
-            sub_result = search_pinyin_path_with_segment(unmatched_list, pinyin_to_words, total_freq)
-            result.extend(sub_result)
-        else:
-            assert(depth > 0)  # 深度搜索失败
-            return []
-        idx = next_idx
-    return result
-
-def get_total_freq(word_freq):
-    total_freq = sum(freq + 1 for freq in word_freq.values())
-    return total_freq
+    # DAG Viterbi 搜索器
+    def search(self, pinyin_list, within_deepsearch=False):
+        dag = self.create_dag(pinyin_list)
+        route = self.calc_route(pinyin_list, dag)
+        result = self.decode_pinyin_path(pinyin_list, route, within_deepsearch)
+        return result
 
 def is_latin_alnum(char):
     return char.isascii() and char.isalnum()
@@ -234,8 +255,11 @@ if __name__ == '__main__':
     parser.add_argument('--input', required=True, help='输入拼音文件路径')
     args = parser.parse_args()
 
-    pinyin_to_words, word_freq = load_dict(args.dict)
-    total_freq = get_total_freq(word_freq)
+    # 读取词典
+    db = DB(args.dict)
+    db.load_dict()
+
+    dvsearcher = DAGViterbiSearcher(db.pinyin_to_words, db.total_freq)
 
     with open(args.input, 'r', encoding='utf-8') as fin:
         for line in fin:
@@ -243,8 +267,6 @@ if __name__ == '__main__':
             if not line:
                 continue
             pinyin_list = split_pinyin_and_punct(line)
-            dag = create_dag(pinyin_list, pinyin_to_words)
-            route = calc_route(pinyin_list, dag, pinyin_to_words, total_freq)
-            result = decode_pinyin_path(pinyin_list, route, pinyin_to_words, total_freq)
+            result = dvsearcher.search(pinyin_list)
             print(format_result(result))
 
