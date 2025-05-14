@@ -85,7 +85,6 @@ def decode_pinyin_path(pinyin_list, route, pinyin_to_words):
     N = len(pinyin_list)
     result = []
     idx = 0
-    after_matched = True
     while idx < N:
         # 如果当前是标点符号，直接保留
         if not pinyin_list[idx][0].isalpha():
@@ -97,17 +96,26 @@ def decode_pinyin_path(pinyin_list, route, pinyin_to_words):
         if word_pinyin_seg in pinyin_to_words:
             best_word = max(pinyin_to_words[word_pinyin_seg], key=lambda x: x[1])[0]
             result.append(best_word)
-            after_matched = True
         else:
-            result.append('' if after_matched else ' ')
-            result.append(' '.join(pinyin_list[idx:next_idx]))  # 保留原始大小写
-            after_matched = False
+            result.extend(pinyin_list[idx:next_idx])  # 保留原始大小写
         idx = next_idx
     return result
 
 def get_total_freq(word_freq):
     total_freq = sum(freq + 1 for freq in word_freq.values())
     return total_freq
+
+def is_latin_alnum(char):
+    return char.isascii() and char.isalnum()
+
+# 格式化输出带空格的文本
+def format_result(result):
+    output = []
+    for i, token in enumerate(result):
+        if i > 0 and token and is_latin_alnum(result[i - 1][-1]) and is_latin_alnum(token[0]):
+            output.append(' ')
+        output.append(token)
+    return ''.join(output)
 
 # 主流程
 if __name__ == '__main__':
@@ -128,5 +136,5 @@ if __name__ == '__main__':
             dag = create_dag(pinyin_list, pinyin_to_words)
             route = calc_route(pinyin_list, dag, pinyin_to_words, total_freq)
             result = decode_pinyin_path(pinyin_list, route, pinyin_to_words)
-            print(''.join(result))
+            print(format_result(result))
 
