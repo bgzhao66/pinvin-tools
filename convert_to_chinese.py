@@ -135,12 +135,10 @@ class DB:
     def __init__(self, path):
         self.path = path
         self.pinyin_to_words = defaultdict(list)
-        self.word_freq = {}
-        self.total_freq = 0
         self.conn = sqlite3.connect(self.path)
         self.cursor = self.conn.cursor()
         self.init_db()
-        logging.info("Database initialized.")
+        logging.debug("Database initialized.")
 
     def init_db(self):
         self.cursor.execute("""
@@ -154,12 +152,23 @@ class DB:
         self.cursor.execute("CREATE INDEX IF NOT EXISTS idx_pinyin ON dict(pinyin)")
         self.cursor.execute("CREATE INDEX IF NOT EXISTS idx_word ON dict(word)")
 
+        self.cursor.execute("""
+            CREATE TABLE IF NOT EXISTS meta (
+                key TEXT PRIMARY KEY,
+                value INTEGER
+            )
+        """)
         self.conn.commit()
 
+    def update_meta(self, total_freq):
+        self.cursor.execute("""
+            INSERT OR REPLACE INTO meta (key, value) VALUES
+                ('total_freq', ?)
+        """, ([total_freq]))
+        self.conn.commit()
 
     # 读取词典文本文件並寫入Db，格式：<pinyin>\t<word>\t<freq>
     def import_data(self, path):
-        BATCH_SIZE = 1000
         entries = []
         with open(path, 'r', encoding='utf-8') as f:
             for line in f:
@@ -167,36 +176,62 @@ class DB:
                 freq = int(freq)
                 entries.append((py.lower(), word, freq))
 
+        BATCH_SIZE = 1000
         for i in range(0, len(entries), BATCH_SIZE):
             batch = entries[i:i + BATCH_SIZE]
             placeholders = ','.join(['?'] * len(batch[0]))
             sql = f"INSERT OR REPLACE INTO dict (pinyin, word, freq) VALUES ({placeholders})"
             self.cursor.executemany(sql, batch)
-
         self.conn.commit()
-        logging.info(f"Imported {len(entries)} entries into the database.")
 
-    # 從sqlDB中讀取詞典至內存
-    def load_dict(self):
-        sql = f"SELECT pinyin, word, freq FROM dict"
-        self.cursor.execute(sql)
-        results = self.cursor.fetchall()
-        for py, word, freq in results:
-            self.pinyin_to_words[py.lower()].append((word, freq))
-            self.word_freq[word] = freq
-        self.total_freq = sum(freq + 1 for freq in self.word_freq.values())
-        logging.info(f"Loaded {len(self.pinyin_to_words)} pinyin entries and {len(self.word_freq)} words from the database.")
+        self.cursor.execute("SELECT SUM(freq + 1) FROM dict")
+        total_freq = self.cursor.fetchone()[0]
+        self.update_meta(total_freq)
+        logging.debug(f"Imported {len(entries)} entries into the database.")
+
+    def get_total_freq(self):
+       self.cursor.execute("SELECT value FROM meta WHERE key = 'total_freq'")
+       total_freq = self.cursor.fetchone()[0]
+       return total_freq
+
+    # check cache self.pinyin_to_words at first, if not found, then query from sqlDB
+    # and cache it
+    def get_word_freq(self, pinyin):
+        if pinyin in self.pinyin_to_words:
+            return self.pinyin_to_words[pinyin]
+        else:
+            self.cursor.execute("SELECT word, freq FROM dict WHERE pinyin = ?", (pinyin,))
+            results = self.cursor.fetchall()
+            if results:
+                for word, freq in results:
+                    self.pinyin_to_words[pinyin].append((word, freq))
+                return self.pinyin_to_words[pinyin]
+            else:
+                return []
+
+    # prefetch (word, freq) from sqlDB for a given list of pinyins in batch mode, and cache them
+    def prefetch_word_freq(self, pinyin_list):
+        BATCH_SIZE = 1000
+        for i in range(0, len(pinyin_list), BATCH_SIZE):
+            batch = pinyin_list[i:i + BATCH_SIZE]
+            placeholders = ','.join(['?'] * len(batch))
+            sql = f"SELECT pinyin, word, freq FROM dict WHERE pinyin IN ({placeholders})"
+            self.cursor.execute(sql, batch)
+            results = self.cursor.fetchall()
+            for py, word, freq in results:
+                self.pinyin_to_words[py.lower()].append((word, freq))
+        logging.debug(f"Prefetched {len(pinyin_list)} pinyin entries from the database.")
 
     # 关闭数据库连接
     def close(self):
         self.cursor.close()
         self.conn.close()
-        logging.info("Database connection closed.")
+        logging.debug("Database connection closed.")
 
 class DAGViterbiSearcher:
-    def __init__(self, pinyin_to_words, total_freq):
-        self.pinyin_to_words = pinyin_to_words
-        self.total_freq = total_freq
+    def __init__(self, db):
+        self.db = db
+        self.total_freq = self.db.get_total_freq()
 
     # 创建 DAG
     def create_dag(self, pinyin_list):
@@ -205,7 +240,8 @@ class DAGViterbiSearcher:
         for i in range(N):
             for j in range(i + 1, N + 1):
                 seg = ''.join(p.lower() for p in pinyin_list[i:j])
-                if seg in self.pinyin_to_words:
+                word_freqs = self.db.get_word_freq(seg)
+                if word_freqs:
                     dag[i].append(j)
             if not dag[i]:
                 dag[i].append(i + 1)  # 无匹配时，按单个拼音前进
@@ -219,8 +255,9 @@ class DAGViterbiSearcher:
             candidates = []
             for j in dag[i]:
                 seg = ''.join(p.lower() for p in pinyin_list[i:j])
-                if seg in self.pinyin_to_words:
-                    prob = max(math.log((freq + 1) / self.total_freq) for word, freq in self.pinyin_to_words[seg])
+                word_freqs = self.db.get_word_freq(seg)
+                if word_freqs:
+                    prob = max(math.log((freq + 1) / self.total_freq) for word, freq in word_freqs)
                 else:
                     prob = math.log(1 / self.total_freq) * (j - i) # 惩罚未知拼音组合
                 candidates.append((prob + route[j][0], j))
@@ -240,8 +277,9 @@ class DAGViterbiSearcher:
                 continue
             next_idx = route[idx][1]
             word_pinyin_seg = ''.join(p.lower() for p in pinyin_list[idx:next_idx])
-            if word_pinyin_seg in self.pinyin_to_words:
-                best_word = max(self.pinyin_to_words[word_pinyin_seg], key=lambda x: x[1])[0]
+            word_freqs = self.db.get_word_freq(word_pinyin_seg)
+            if word_freqs:
+                best_word = max(word_freqs, key=lambda x: x[1])[0]
                 result.append(best_word)
             else:
                 if within_deepsearch:
@@ -305,8 +343,7 @@ if __name__ == '__main__':
         sys.stderr.write("Error: --input is required\n")
         sys.exit(-1)
 
-    db.load_dict()
-    dvsearcher = DAGViterbiSearcher(db.pinyin_to_words, db.total_freq)
+    dvsearcher = DAGViterbiSearcher(db)
 
     with open(args.input, 'r', encoding='utf-8') as fin:
         for line in fin:
@@ -314,6 +351,8 @@ if __name__ == '__main__':
             if not line:
                 continue
             pinyin_list = split_pinyin_and_punct(line)
+            # 预取词频数据
+            db.prefetch_word_freq(pinyin_list)
             result = dvsearcher.search(pinyin_list)
             print(format_result(result))
 
