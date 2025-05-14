@@ -65,7 +65,7 @@ def create_dag(pinyin_list, pinyin_to_words):
     return dag
 
 # Viterbi 计算最优路径
-def calc_route(pinyin_list, dag, pinyin_to_words):
+def calc_route(pinyin_list, dag, pinyin_to_words, total_freq):
     N = len(pinyin_list)
     route = {N: (0, 0)}
     for i in range(N - 1, -1, -1):
@@ -73,9 +73,9 @@ def calc_route(pinyin_list, dag, pinyin_to_words):
         for j in dag[i]:
             seg = ''.join(p.lower() for p in pinyin_list[i:j])
             if seg in pinyin_to_words:
-                prob = max(math.log(freq + 1) for word, freq in pinyin_to_words[seg])
+                prob = max(math.log((freq + 1) / total_freq) for word, freq in pinyin_to_words[seg])
             else:
-                prob = -10.0 * (j - i)  # 惩罚未知拼音组合
+                prob = math.log(1 / total_freq) * (j - i) # 惩罚未知拼音组合
             candidates.append((prob + route[j][0], j))
         route[i] = max(candidates)
     return route
@@ -105,6 +105,10 @@ def decode_pinyin_path(pinyin_list, route, pinyin_to_words):
         idx = next_idx
     return result
 
+def get_total_freq(word_freq):
+    total_freq = sum(freq + 1 for freq in word_freq.values())
+    return total_freq
+
 # 主流程
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -113,6 +117,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     pinyin_to_words, word_freq = load_dict(args.dict)
+    total_freq = get_total_freq(word_freq)
 
     with open(args.input, 'r', encoding='utf-8') as fin:
         for line in fin:
@@ -121,7 +126,7 @@ if __name__ == '__main__':
                 continue
             pinyin_list = split_pinyin_and_punct(line)
             dag = create_dag(pinyin_list, pinyin_to_words)
-            route = calc_route(pinyin_list, dag, pinyin_to_words)
+            route = calc_route(pinyin_list, dag, pinyin_to_words, total_freq)
             result = decode_pinyin_path(pinyin_list, route, pinyin_to_words)
             print(''.join(result))
 
