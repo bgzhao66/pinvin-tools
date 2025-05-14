@@ -4,6 +4,9 @@ import unicodedata
 import argparse
 import re
 import logging
+import sqlite3
+import sys
+
 
 # 英文标点转中文标点
 PUNCTUATION_MAP = {
@@ -134,28 +137,61 @@ class DB:
         self.pinyin_to_words = defaultdict(list)
         self.word_freq = {}
         self.total_freq = 0
+        self.conn = sqlite3.connect(self.path)
+        self.cursor = self.conn.cursor()
+        self.init_db()
+        logging.info("Database initialized.")
 
-    # 读取词典文件，格式：<pinyin>\t<word>\t<freq>
-    def load_dict(self):
-        with open(self.path, 'r', encoding='utf-8') as f:
+    def init_db(self):
+        self.cursor.execute("""
+            CREATE TABLE IF NOT EXISTS dict (
+                pinyin TEXT NOT NULL,
+                word TEXT NOT NULL,
+                freq INTEGER DEFAULT 0,
+                PRIMARY KEY (pinyin, word)
+            )
+        """)
+        self.cursor.execute("CREATE INDEX IF NOT EXISTS idx_pinyin ON dict(pinyin)")
+        self.cursor.execute("CREATE INDEX IF NOT EXISTS idx_word ON dict(word)")
+
+        self.conn.commit()
+
+
+    # 读取词典文本文件並寫入Db，格式：<pinyin>\t<word>\t<freq>
+    def import_data(self, path):
+        BATCH_SIZE = 1000
+        entries = []
+        with open(path, 'r', encoding='utf-8') as f:
             for line in f:
                 py, word, freq = line.strip().split('\t')
                 freq = int(freq)
-                self.pinyin_to_words[py.lower()].append((word, freq))
-                self.word_freq[word] = freq
-        self.total_freq = sum(freq + 1 for freq in self.word_freq.values())
+                entries.append((py.lower(), word, freq))
 
-# 读取词典文件，格式：<pinyin>\t<word>\t<freq>
-def load_dict(path):
-    pinyin_to_words = defaultdict(list)
-    word_freq = {}
-    with open(path, 'r', encoding='utf-8') as f:
-        for line in f:
-            py, word, freq = line.strip().split('\t')
-            freq = int(freq)
-            pinyin_to_words[py.lower()].append((word, freq))
-            word_freq[word] = freq
-    return pinyin_to_words, word_freq
+        for i in range(0, len(entries), BATCH_SIZE):
+            batch = entries[i:i + BATCH_SIZE]
+            placeholders = ','.join(['?'] * len(batch[0]))
+            sql = f"INSERT OR REPLACE INTO dict (pinyin, word, freq) VALUES ({placeholders})"
+            self.cursor.executemany(sql, batch)
+
+        self.conn.commit()
+        logging.info(f"Imported {len(entries)} entries into the database.")
+
+    # 從sqlDB中讀取詞典至內存
+    def load_dict(self):
+        sql = f"SELECT pinyin, word, freq FROM dict"
+        self.cursor.execute(sql)
+        results = self.cursor.fetchall()
+        for py, word, freq in results:
+            self.pinyin_to_words[py.lower()].append((word, freq))
+            self.word_freq[word] = freq
+        self.total_freq = sum(freq + 1 for freq in self.word_freq.values())
+        logging.info(f"Loaded {len(self.pinyin_to_words)} pinyin entries and {len(self.word_freq)} words from the database.")
+
+    # 关闭数据库连接
+    def close(self):
+        self.cursor.close()
+        self.conn.close()
+        logging.info("Database connection closed.")
 
 class DAGViterbiSearcher:
     def __init__(self, pinyin_to_words, total_freq):
@@ -250,15 +286,26 @@ def format_result(result):
 
 # 主流程
 if __name__ == '__main__':
+    logging.basicConfig(stream=sys.stderr, level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dict', default='txt/dict.txt', help='词典文件路径')
-    parser.add_argument('--input', required=True, help='输入拼音文件路径')
+    parser.add_argument('--dict', default='txt/dict.db', help='词典文件路径')
+    parser.add_argument('--import_data', default=None, help='需要導入的數據文件')
+    parser.add_argument('--input', default=None, help='输入拼音文件路径')
     args = parser.parse_args()
 
-    # 读取词典
     db = DB(args.dict)
-    db.load_dict()
 
+    if args.import_data:
+        db.import_data(args.import_data)
+        print("Ok, Data imported!")
+        sys.exit(0)
+
+    if not args.input:
+        parser.print_help()
+        sys.stderr.write("Error: --input is required\n")
+        sys.exit(-1)
+
+    db.load_dict()
     dvsearcher = DAGViterbiSearcher(db.pinyin_to_words, db.total_freq)
 
     with open(args.input, 'r', encoding='utf-8') as fin:
@@ -270,3 +317,4 @@ if __name__ == '__main__':
             result = dvsearcher.search(pinyin_list)
             print(format_result(result))
 
+    db.close()
