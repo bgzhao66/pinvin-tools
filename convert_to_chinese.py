@@ -2,6 +2,7 @@ from collections import defaultdict
 import math
 import unicodedata
 import argparse
+import re
 
 # 英文标点转中文标点
 PUNCTUATION_MAP = {
@@ -22,6 +23,93 @@ PUNCTUATION_MAP = {
     '<': '《',
     '>': '》'
 }
+
+INITIAL_TEXT = """
+b (玻)	d (得)	g (哥)	j (基)	zh (知)	z (资)	s (思)
+p (坡)	t (特)	k (科)	q (欺)	ch (蚩)	c (雌)
+m (摸)	n (讷)	h (喝)	x (希)	sh (诗)
+f (佛)	l (勒)			r (日)
+"""
+
+FINALS_TEXT = """
+a (啊)	a	ar	aa	ah
+o (喔)	o	or	oo	oh
+e (鹅)	e	er	ee	eh
+ai (哀)	ai	air	ae	ay
+ei (欸)	ei	eir	ea	ey
+ao (熬)	ao	aor	au	aw
+ou (欧)	ou	our	oa	ow
+el (儿)	el	erl	eel	ehl
+an (安)	an	arn	aan	am
+en (恩)	en	ern	een	em
+ang (昂)	ang	arng	aang	amg
+eng (亨的韵母)	eng	erng	eeng	emg
+ong (轰的韵母)	ong	orng	oong	omg
+i (衣)	i	ir	yi	ih
+in (因)	in	irn	yin	im
+ing (英)	ing	irng	ying	img
+ia (呀)	ia	ya	iaa	iah
+ie (耶)	ie	ye	iee	ieh
+iao (腰)	iao	yao	iau	iaw
+iou (忧)	iou	you	ioa	iow
+ian (烟)	ian	yan	iaan	iam
+iang (央)	iang	yang	iaang	iamg
+iong (雍)	iong	yong	ioong	iomg
+u (乌)	u	ur	wu	uh
+ua (蛙)	ua	wa	uaa	uah
+uo (窝)	uo	wo	uoo	uoh
+uai (歪)	uai	wai	uae	uay
+uei (威)	uei	wei	uea	uey
+uan (弯)	uan	wan	uaan	uam
+uen (温)	uen	wen	ueen	uem
+uang (汪)	uang	wang	uaang	uamg
+ueng (翁)	ueng	weng	ueeng	uemg
+eu (迂)	eu	eur	yu	ew
+eue (约)	eue	yue	euee	eueh
+euan (冤)	euan	yuan	euaan	euam
+euen (晕)	euen	yuen	eueen	euem
+"""
+
+# 解析拼音表with REGEX
+def get_syllable_table():
+    initials = set(re.findall(r'[a-z]*', INITIAL_TEXT))
+    finals = set(re.findall(r'[a-z]*', FINALS_TEXT))
+    initials.add('')  # 添加空字符串作为初始音节
+    finals.discard('')
+
+    syllables = set()
+    for initial in initials:
+        for final in finals:
+            syllable = re.sub(r'([jqx])eu', r'\1u', initial + final)  # 处理特殊拼音
+            syllables.add(syllable)
+    for final in finals:
+        syllables.add("v" + final)  # 添加带v的拼音
+    return syllables
+
+# 读取拼音表
+SYLLABLES = get_syllable_table()
+
+# 尝试将拼音分割为音节, RMM 算法
+def try_split_tosyllables(word, syllable_dict=SYLLABLES, max_len=7):
+    syllables = []
+    matched = False
+    i = len(word)
+    word = word.lower()
+
+    while i > 0:
+        for j in range(min(max_len, i), 0, -1):
+            cand = word[i-j:i]
+            if cand not in syllable_dict:
+                matched = False
+                continue
+            syllables.append(cand)
+            i -= j
+            matched = True
+            break
+        if not matched:
+            return [] # fail
+    syllables.reverse()
+    return syllables
 
 # 分离标点和拼音
 def split_pinyin_and_punct(text):
@@ -80,8 +168,24 @@ def calc_route(pinyin_list, dag, pinyin_to_words, total_freq):
         route[i] = max(candidates)
     return route
 
+# 尝试分割未知拼音, 並且通過DAG—Viterbi算法檢索最佳匹配, 如果成功返回結果, 否則返回原始拼音
+def search_pinyin_path_with_segment(unmatched_list, pinyin_to_words, total_freq):
+    pinyin_list = []
+    for token in unmatched_list:
+        syllables = try_split_tosyllables(token)
+        if not syllables:
+            return unmatched_list  # 无法分割
+        pinyin_list.extend(syllables)
+
+    dag = create_dag(pinyin_list, pinyin_to_words)
+    route = calc_route(pinyin_list, dag, pinyin_to_words, total_freq)
+    result = decode_pinyin_path(pinyin_list, route, pinyin_to_words, total_freq, depth=1)
+
+    # 如果在深度搜索中没有找到匹配的词，返回原始拼音
+    return result if result else unmatched_list
+
 # 回溯路径并生成汉字或原始拼音输出
-def decode_pinyin_path(pinyin_list, route, pinyin_to_words):
+def decode_pinyin_path(pinyin_list, route, pinyin_to_words, total_freq, depth=0):
     N = len(pinyin_list)
     result = []
     idx = 0
@@ -96,8 +200,14 @@ def decode_pinyin_path(pinyin_list, route, pinyin_to_words):
         if word_pinyin_seg in pinyin_to_words:
             best_word = max(pinyin_to_words[word_pinyin_seg], key=lambda x: x[1])[0]
             result.append(best_word)
+        elif depth == 0:
+            # 如果没有找到匹配的词，尝试分割
+            unmatched_list = pinyin_list[idx:next_idx]
+            sub_result = search_pinyin_path_with_segment(unmatched_list, pinyin_to_words, total_freq)
+            result.extend(sub_result)
         else:
-            result.extend(pinyin_list[idx:next_idx])  # 保留原始大小写
+            assert(depth > 0)  # 深度搜索失败
+            return []
         idx = next_idx
     return result
 
@@ -135,6 +245,6 @@ if __name__ == '__main__':
             pinyin_list = split_pinyin_and_punct(line)
             dag = create_dag(pinyin_list, pinyin_to_words)
             route = calc_route(pinyin_list, dag, pinyin_to_words, total_freq)
-            result = decode_pinyin_path(pinyin_list, route, pinyin_to_words)
+            result = decode_pinyin_path(pinyin_list, route, pinyin_to_words, total_freq)
             print(format_result(result))
 
