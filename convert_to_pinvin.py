@@ -734,6 +734,11 @@ def is_ascii(ch):
         return False
     return all(c.isascii() for c in ch)
 
+def is_newline(ch):
+    if len(ch) == 0:
+        return False
+    return ch[-1] in ['\n', '\r']
+
 def convert_text(text, userdict=None):
     import jieba
     from pypinyin import pinyin, Style
@@ -764,9 +769,9 @@ def convert_text(text, userdict=None):
         if is_start:
             cap = pvs[0].capitalize()
             pvs[0] = cap
-            if len(cap) > 0 and cap[0].isupper():
+            if len(cap) > 0 and cap[0].isalnum():
                 is_start = False
-        elif is_period(pvs[-1]):
+        elif is_period(pvs[-1]) or is_newline(pvs[-1]):
             is_start = True
         if not is_punctuation(pvs[0]):
             sys.stdout.write(' ')
