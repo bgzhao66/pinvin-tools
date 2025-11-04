@@ -4050,7 +4050,7 @@
 三染: sān rǎn
 三查三整: sān zhā sān zhěng
 三柱: sān zhù
-三柱裡: sān zhù lǐ
+三柱里: sān zhù lǐ
 三柱門: sān zhù mén
 三柳: sān liǔ
 三欒: sān luán
@@ -4992,7 +4992,7 @@
 上呼吸道感染: shàng hū xī dào gǎn rǎn
 上命: shàng mìng
 上和下睦: shàng hé xià mù
-上鹹五: shàng xián wǔ
+上咸五: shàng xián wǔ
 上品: shàng pǐn
 上哲: shàng zhé
 上唇: shàng chún
@@ -12596,7 +12596,7 @@
 中酒: zhōng jiǔ
 中酲: zhōng chéng
 中酺: zhōng pú
-中裡: zhōng lǐ
+中里: zhōng lǐ
 中野: zhōng yě
 中量級: zhōng liàng jí
 中金: zhōng jīn
@@ -15850,7 +15850,7 @@
 喬忿: qiáo fèn
 喬性: qiáo xìng
 喬怯: qiáo qiè
-喬戈裡峰: qiáo gē lǐ fēng
+喬戈里峰: qiáo gē lǐ fēng
 喬才: qiáo cái
 喬扦: qiáo qiān
 喬扮: qiáo bàn
@@ -17093,7 +17093,7 @@
 也該好好地想想: yě gāi hǎo hǎo de xiǎng xiǎng
 也那: yě nà
 也邪: yě xié
-也裡可溫: yě lǐ kě wēn
+也里可溫: yě lǐ kě wēn
 也門: yě mén
 也須: yě xū
 習與體成: xí yǔ tǐ chéng
@@ -17228,7 +17228,7 @@
 鄉丘: xiāng qiū
 鄉中: xiāng zhōng
 鄉舉: xiāng jǔ
-鄉舉裡選: xiāng jǔ lǐ xuǎn
+鄉舉里選: xiāng jǔ lǐ xuǎn
 鄉義: xiāng yì
 鄉樂: xiāng lè
 鄉書: xiāng shū
@@ -17237,7 +17237,7 @@
 鄉井: xiāng jǐng
 鄉亭: xiāng tíng
 鄉親: xiāng qīn
-鄉親裡道: xiāng qīn lǐ dào
+鄉親里道: xiāng qīn lǐ dào
 鄉人: xiāng rén
 鄉人子: xiāng rén zǐ
 鄉從: xiāng cóng
@@ -19148,7 +19148,7 @@
 二命黨: èr mìng dǎng
 二和: èr hé
 二和藥: èr huò yào
-二鹹: èr xián
+二咸: èr xián
 二哈: èr hā
 二哥: èr gē
 二哲: èr zhé
@@ -29572,7 +29572,7 @@
 伽藍神: qié lán shén
 伽藍香: qié lán xiāng
 伽那: qié nà
-伽裡略: jiā lǐ lüè
+伽里略: jiā lǐ lüè
 伽陀: qié tuó
 伽陀羅: qié tuó luó
 伽馬: gā mǎ
@@ -48675,7 +48675,7 @@
 凍容: dòng róng
 凍寒: dòng hán
 凍嵐: dòng lán
-凍幹: dòng gān
+凍乾: dòng gān
 凍櫃: dòng guì
 凍柳: dòng liǔ
 凍樹: dòng shù
@@ -52504,7 +52504,7 @@
 分爨: fēn cuàn
 分愛: fēn ài
 分片: fēn piàn
-分片包乾: fēn piàn bāo gān
+分片包幹: fēn piàn bāo gān
 分物: fēn wù
 分獻: fēn xiàn
 分猷: fēn yóu
@@ -59293,10 +59293,10 @@
 包工頭: bāo gōng tóu
 包巾: bāo jīn
 包席: bāo xí
-包乾: bāo gān
-包乾兒: bāo gān ér
-包乾分配: bāo gān fēn pèi
-包乾制: bāo gān zhì
+包幹: bāo gān
+包幹兒: bāo gān ér
+包幹分配: bāo gān fēn pèi
+包幹制: bāo gān zhì
 包庇: bāo bì
 包彈: bāo dàn
 包待制: bāo dài zhì
@@ -61128,7 +61128,7 @@
 十指有長短: shí zhǐ yǒu cháng duǎn
 十指連心: shí zhǐ lián xīn
 十指露縫: shí zhǐ lù fèng
-十捉九著: shí zhuō jiǔ zhe
+十捉九著: shí zhuō jiǔ zhao
 十教: shí jiào
 十數: shí shù
 十齋: shí zhāi
@@ -72068,7 +72068,7 @@
 葉輪機械: yè lún jī xiè
 葉選平: yè xuǎn píng
 葉酸: yè suān
-葉裡溫: yè lǐ wēn
+葉里溫: yè lǐ wēn
 葉金: yè jīn
 葉門: yè mén
 葉問: yè wèn
@@ -79214,7 +79214,7 @@
 鹹丸子: xián wán zǐ
 鹹雲: xián yún
 咸五登三: xián wǔ dēng sān
-鹹京: xián jīng
+咸京: xián jīng
 咸興: xián xīng
 咸興市: xián xīng shì
 鹹劉: xián liú
@@ -79223,7 +79223,7 @@
 鹹同: xián tóng
 鹹味: xián wèi
 咸和: xián hé
-鹹唐: xián táng
+咸唐: xián táng
 鹹嘴淡舌: xián zuǐ dàn shé
 鹹土: xián tǔ
 鹹墨: xián mò
@@ -79235,7 +79235,7 @@
 咸安區: xián ān qū
 咸安宮: xián ān gōng
 咸安宮官學: xián ān gōng guān xué
-鹹平: xián píng
+咸平: xián píng
 鹹感: xián gǎn
 鹹擢: xián zhuó
 鹹杬子: xián yuán zǐ
@@ -79263,7 +79263,7 @@
 鹹鹽: xián yán
 鹹福宮: xián fú gōng
 鹹秦: xián qín
-鹹秩: xián zhì
+咸秩: xián zhì
 鹹繩: xián shéng
 鹹肉: xián ròu
 鹹肉莊: xián ròu zhuāng
@@ -83585,7 +83585,7 @@
 回帖: huí tiē
 迴帶: huí dài
 回席: huí xí
-回幹就溼: huí gān jiù shī
+回乾就溼: huí gān jiù shī
 回應: huí yìng
 迴廊: huí láng
 回延: huí yán
@@ -84059,7 +84059,7 @@
 團書: tuán shū
 團雲隊: tuán yún duì
 團代會: tuán dài huì
-團伙: tuán huǒ
+團夥: tuán huǒ
 團體: tuán tǐ
 團體冠軍: tuán tǐ guàn jūn
 團體操: tuán tǐ cāo
@@ -88684,7 +88684,7 @@
 埃迪卡拉: āi dí kǎ lā
 埃迪卡拉紀: āi dí kǎ lā jì
 埃鬱: āi yù
-埃裡溫: āi lǐ wēn
+埃里溫: āi lǐ wēn
 埃霧: āi wù
 埆埆: què què
 埆塉: què jí
@@ -93456,8 +93456,8 @@
 大包: dà bāo
 大包單: dà bāo dān
 大包大攬: dà bāo dà lǎn
-大包乾: dà bāo gān
-大包乾兒: dà bāo gān er
+大包幹: dà bāo gān
+大包幹兒: dà bāo gān er
 大化: dà huà
 大化縣: dà huà xiàn
 大化改新: dà huà gǎi xīn
@@ -93522,7 +93522,7 @@
 大口徑: dà kǒu jìng
 大古: dà gǔ
 大古來: dà gǔ lái
-大古裡: dà gǔ lǐ
+大古里: dà gǔ lǐ
 大隻: dà zhī
 大叫: dà jiào
 大叫喚: dà jiào huàn
@@ -94472,7 +94472,7 @@
 大溜: dà liù
 大溪: dà xī
 大溪地: dà xī dì
-大溪豆幹: dà xī dòu gān
+大溪豆乾: dà xī dòu gān
 大溪鎮: dà xī zhèn
 大溲: dà sōu
 大滑: dà huá
@@ -103320,8 +103320,8 @@
 孋戎: lí róng
 子一代: zǐ yī dài
 子不語: zǐ bù yǔ
-子醜: zǐ chǒu
-子醜寅卯: zǐ chǒu yín mǎo
+子丑: zǐ chǒu
+子丑寅卯: zǐ chǒu yín mǎo
 子個: zǐ gè
 子為父隱: zǐ wéi fù yǐn
 子麼: zǐ mǒ
@@ -108159,7 +108159,7 @@
 實數集: shí shù jí
 實施: shí shī
 實施例: shí shī lì
-即時: shí shí
+實時: shí shí
 實是: shí shì
 實景: shí jǐng
 實有: shí yǒu
@@ -109891,7 +109891,7 @@
 家常菜: jiā cháng cài
 家常話: jiā cháng huà
 家常豆腐: jiā cháng dòu fu
-家常裡短: jiā cháng lǐ duǎn
+家常里短: jiā cháng lǐ duǎn
 家常飯: jiā cháng fàn
 家慶: jiā qìng
 家底: jiā dǐ
@@ -110117,7 +110117,7 @@
 家長學校: jiā zhǎng xué xiào
 家長家短: jiā cháng jiā duǎn
 家長禮短: jiā cháng lǐ duǎn
-家長裡短: jiā cháng lǐ duǎn
+家長里短: jiā cháng lǐ duǎn
 家門: jiā mén
 家門集: jiā mén jí
 家問: jiā wèn
@@ -112617,8 +112617,8 @@
 察辨: chá biàn
 察辯: chá biàn
 察選: chá xuǎn
-察裡津: chá lǐ jīn
-察裡津保衛戰: chá lǐ jīn bǎo wèi zhàn
+察里津: chá lǐ jīn
+察里津保衛戰: chá lǐ jīn bǎo wèi zhàn
 察問: chá wèn
 察閱: chá yuè
 察院: chá yuàn
@@ -116451,7 +116451,7 @@
 尤為: yóu wéi
 尤雲殢雨: yóu yún tì yǔ
 尤雲殢雪: yóu yún tì xuě
-尤克里裡: yóu kè lǐ lǐ
+尤克里里: yóu kè lǐ lǐ
 尤其: yóu qí
 尤其是: yóu qí shì
 尤利西斯: yóu lì xī sī
@@ -122675,7 +122675,7 @@
 巴布延群島: bā bù yán qún dǎo
 巴布拉族: bā bù lā zú
 巴希爾: bā xī ěr
-巴幹達人: bā gàn dá rén
+巴干達人: bā gàn dá rén
 巴庫: bā kù
 巴錄: bā lù
 巴彥: bā yàn
@@ -123501,7 +123501,7 @@
 布魯克海文實驗室: bù lǔ kè hǎi wén shí yàn shì
 布魯圖斯: bù lǔ tú sī
 布魯塞爾: bù lǔ sài ěr
-布魯姆斯伯裡: bù lǔ mǔ sī bó lǐ
+布魯姆斯伯里: bù lǔ mǔ sī bó lǐ
 布魯斯: bù lǔ sī
 布魯日: bù lǔ rì
 布魯氏菌病: bù lǔ shì jūn bìng
@@ -123940,7 +123940,7 @@
 帕尼巴特: pà ní bā tè
 帕德嫩神廟: pà dé nèn shén miào
 帕拉塞爾士: pà lā sè ěr shì
-帕拉馬裡博: pà lā mǎ lǐ bó
+帕拉馬里博: pà lā mǎ lǐ bó
 帕提亞人: pà tí yà rén
 帕提儂神廟: pà tí nóng shén miào
 帕斯: pà sī
@@ -124206,7 +124206,7 @@
 帝釋: dì shì
 帝釋天: dì shì tiān
 帝釋青: dì shì qīng
-帝裡: dì lǐ
+帝里: dì lǐ
 帝闉: dì yīn
 帝門: dì mén
 帝閒: dì xián
@@ -125072,7 +125072,7 @@
 幹事: gàn shì
 幹事人: gàn shì rén
 幹事長: gàn shi zhǎng
-幹雲: gān yún
+干雲: gān yún
 乾雲蔽日: gān yún bì rì
 乾產: gān chǎn
 乾親: gān qīn
@@ -125086,7 +125086,7 @@
 幹休所: gàn xiū suǒ
 幹位: gàn wèi
 幹佐: gàn zuǒ
-幹餘骨: gàn yú gǔ
+乾餘骨: gàn yú gǔ
 幹侯: gàn hòu
 幹修: gàn xiū
 幹俸: gān fèng
@@ -125125,16 +125125,16 @@
 幹化: gàn huà
 幹匿: gàn nì
 幹升: gàn shēng
-幹滷: gān lǔ
+乾滷: gān lǔ
 干卿底事: gān qīng dǐ shì
 幹歷: gān lì
 幹叩: gàn kòu
-幹葉: gān yè
+乾葉: gān yè
 乾號: gān háo
-幹吊: gàn diào
-幹名: gàn míng
-幹名犯義: gān míng fàn yì
-幹名採譽: gān míng cǎi yù
+乾吊: gàn diào
+干名: gàn míng
+干名犯義: gān míng fàn yì
+干名採譽: gān míng cǎi yù
 幹吏: gàn lì
 幹呂: gān lǚ
 幹嗎: gàn má
@@ -125152,27 +125152,27 @@
 乾哭: gān kū
 幹啥: gàn shá
 乾啼溼哭: gān tí shī kū
-幹嗌: gàn ài
-幹嗝: gān gé
+乾嗌: gàn ài
+乾嗝: gān gé
 幹嘛: gàn ma
-幹噎: gàn yē
+乾噎: gàn yē
 幹器: gàn qì
 乾嚎: gān háo
-幹固: gàn gù
+乾固: gàn gù
 幹國: gàn guó
-幹坼: gān chè
+乾坼: gān chè
 干城: gān chéng
 干城之將: gān chéng zhī jiàng
 干城章嘉峰: gān chéng zhāng jiā fēng
 幹堂: gàn táng
-幹堆: gàn duī
-幹壁畫: gān bì huà
-幹處理: gàn chǔ lǐ
+乾堆: gàn duī
+乾壁畫: gān bì huà
+乾處理: gàn chǔ lǐ
 幹大: gàn dà
 幹天: gàn tiān
 乾女兒: gān nǚ ér
 幹奴: gàn nú
-幹奶婆: qián nǎi pó
+乾奶婆: qián nǎi pó
 乾媽: gān mā
 乾妹子: gàn mèi zǐ
 乾薑: gān jiāng
@@ -125219,15 +125219,15 @@
 乾性油: gān xìng yóu
 幹恩蔭: gàn ēn yìn
 幹惹: gān rě
-幹愁: gàn chóu
+乾愁: gàn chóu
 干戈: gān gē
 干戈載戢: gān gē zǎi jí
 幹戎: gān róng
 干鏚: gàn qī
 干鏚舞: gàn qī wǔ
 幹戾: gān lì
-幹手: gàn shǒu
-幹手機: gān shǒu jī
+乾手: gàn shǒu
+乾手機: gān shǒu jī
 幹才: gàn cái
 幹打鬨: gàn dǎ hǒng
 乾打壘: gān dǎ lěi
@@ -125257,14 +125257,14 @@
 乾旱土: gān hàn tǔ
 干時: gàn shí
 幹暴: gàn bào
-幹暵: gān hàn
+乾暵: gān hàn
 幹本: gàn běn
 乾材: gàn cái
 乾村沙: gàn cūn shā
-幹條: qián tiáo
+乾條: qián tiáo
 乾杯: gān bēi
-幹松: gān sōng
-幹板: gàn bǎn
+乾松: gān sōng
+乾板: gàn bǎn
 幹枉: gàn wǎng
 乾果: gān guǒ
 乾枝: gàn zhī
@@ -125279,15 +125279,15 @@
 幹楨: gàn zhēn
 乾梅子: gān méi zi
 幹植: gàn zhí
-幹榨: gàn zhà
-幹槁: gàn gǎo
+乾榨: gàn zhà
+乾槁: gàn gǎo
 幹櫓: gān lǔ
 幹欲: gàn yù
 幹欺: gàn qī
 幹止: gàn zhǐ
 幹正: gān zhèng
-幹求: gàn qiú
-幹沐浴: qián mù yù
+干求: gàn qiú
+乾沐浴: qián mù yù
 乾沒: gān mò
 幹河: gàn hé
 幹治: gàn zhì
@@ -125301,35 +125301,35 @@
 幹浄利落: gàn jìng lì luo
 幹浄土: qián jìng tǔ
 幹浄地: qián jìng dì
-幹淺: gàn qiǎn
+乾淺: gàn qiǎn
 幹濟: gàn jì
-幹浴: qián yù
-幹海: gān hǎi
+乾浴: qián yù
+乾海: gān hǎi
 幹浼: gàn měi
 干涉: gān shè
 干涉儀: gān shè yí
 干涉現象: gān shè xiàn xiàng
-幹澇: gàn lào
+乾澇: gàn lào
 乾澀: gān sè
 乾涸: gān hé
 幹瀆: gàn dú
 幹渠: gàn qú
 幹渡錢: gàn dù qián
-幹渣渣: gàn zhā zhā
+乾渣渣: gàn zhā zhā
 乾渴: gān kě
 乾溼度地帶性: gàn shī dù dì dài xìng
 乾溼球溫度表: gàn shī qiú wēn dù biǎo
-幹溢: qián yì
+乾溢: qián yì
 乾溪: qián xī
 乾溪臺: qián xī tái
 幹溷: gān hùn
-幹漠: qián mò
+乾漠: qián mò
 幹漫: gàn màn
-幹潮: gān cháo
+乾潮: gān cháo
 幹災: gàn zāi
 乾點: gān diǎn
-幹烈: gān liè
-幹烘茶: gān hōng chá
+乾烈: gān liè
+乾烘茶: gān hōng chá
 幹煩: gàn fán
 乾熱: gān rè
 乾焦: gàn jiāo
@@ -125337,8 +125337,8 @@
 乾煸四季豆: gān biān sì jì dòu
 乾煸土豆絲: gān biān tǔ dòu sī
 乾煸豆角: gān biān dòu jiǎo
-幹熯: gān hàn
-幹燋: gàn jiāo
+乾熯: gān hàn
+乾燋: gàn jiāo
 乾燥: gān zào
 乾燥劑: gān zào jì
 乾燥器: gān zào qì
@@ -125349,8 +125349,8 @@
 乾爸: gān bà
 乾爹: gān diē
 乾爽: gān shuǎng
-幹物: qián wù
-幹物女: gān wù nǚ
+乾物: qián wù
+乾物女: gān wù nǚ
 干犯: gān fàn
 幹玃: gàn jué
 幹理: gàn lǐ
@@ -125359,47 +125359,47 @@
 幹用: gàn yòng
 乾電池: gān diàn chí
 幹略: gàn lüè
-幹癆: gàn láo
-幹瘠: gān jí
+乾癆: gàn láo
+乾瘠: gān jí
 乾瘦: gān shòu
 乾癟: gān biě
 乾癬: gān xuǎn
 乾白: gàn bái
 幹直: gàn zhí
-幹相思: qián xiāng sī
+乾相思: qián xiāng sī
 乾眼症: gān yǎn zhèng
 幹著: qián zhe
 乾著急: gān zháo jí
 乾瞪眼: gān dèng yǎn
-幹矢橛: gàn shǐ jué
-幹研墨: qián yán mò
+乾矢橛: gàn shǐ jué
+乾研墨: qián yán mò
 乾硬: gān yìng
 干礙: gān ài
 乾禮: gān lǐ
-幹祈: gàn qí
+干祈: gàn qí
 幹祫: gàn xiá
 幹禁: gàn jìn
-幹祿: gàn lù
+干祿: gàn lù
 幹福: gàn fú
 幹突: gàn tū
 幹竊: gàn qiè
-幹竭: gàn jié
+乾竭: gàn jié
 幹端坤倪: gàn duān kūn ní
 乾笑: gān xiào
-幹筆: gān bǐ
+乾筆: gān bǐ
 乾等: gān děng
 幹策: gàn cè
-幹策策: gān cè cè
-幹筴筴: gān jiā jiā
+乾策策: gān cè cè
+乾筴筴: gān jiā jiā
 幹管: gàn guǎn
 乾篾片: qián miè piàn
 乾粉: gān fěn
-幹糞: gān fèn
+乾糞: gān fèn
 乾糧: gān liáng
 乾糧袋: gān liáng dài
 乾餱: gān hóu
-幹糒: gàn bèi
-幹糙: gān cāo
+乾糒: gàn bèi
+乾糙: gān cāo
 干係: gān xì
 幹索: gàn suǒ
 幹累: gān lèi
@@ -125410,14 +125410,14 @@
 乾結: gān jié
 幹績: gàn jì
 幹縵: gàn màn
-幹縮: qián suō
+乾縮: qián suō
 幹罰: gàn fá
 幹罷: gàn bà
 幹群: gàn qún
 幹羽: gàn yǔ
 幹翮: gàn hé
 幹翼: gàn yì
-幹老子: gàn lǎo zi
+乾老子: gàn lǎo zi
 乾耗: gān hào
 幹聒: gān guō
 幹肅: gàn sù
@@ -125429,36 +125429,36 @@
 乾脆: gān cuì
 乾脆利索: gān cuì lì suǒ
 乾脆利落: gān cuì lì luò
-幹脯: gàn fǔ
-幹臘: gàn là
+乾脯: gàn fǔ
+乾臘: gàn là
 幹臣: gàn chén
 幹輿: gàn yú
 幹舞: gàn wǔ
-幹船塢: gàn chuán wù
-幹色: gàn sè
+乾船塢: gàn chuán wù
+乾色: gàn sè
 乾花: gān huā
 乾茨臘: gàn cí là
 乾草: gān cǎo
 乾草堆: gān cǎo duī
-幹荒: gān huāng
+乾荒: gān huāng
 幹莫: gàn mò
-幹菓: qián guǒ
+乾菓: qián guǒ
 乾菜: gān cài
-幹萎: gàn wěi
+乾萎: gàn wěi
 幹營: gàn yíng
 乾落: qián luò
-幹蔗: gàn zhè
+乾蔗: gàn zhè
 乾薪: gān xīn
 幹蠱: gàn gǔ
-幹蛋: gàn dàn
-幹血勞: qián xuè láo
+乾蛋: gàn dàn
+乾血勞: qián xuè láo
 乾血漿: qián xuè jiāng
-幹血癆: gàn xuè láo
+乾血癆: gàn xuè láo
 乾衣: gān yī
 乾裂: gān liè
 幹裕: gàn yù
 幹觸: gàn chù
-幹譽: gān yù
+干譽: gān yù
 幹警: gàn jǐng
 幹託: gàn tuō
 幹諱: gān huì
@@ -125467,29 +125467,29 @@
 幹詬: gàn gòu
 幹誤: gàn wù
 幹說: gàn shuō
-幹請: gàn qǐng
+干請: gàn qǐng
 幹謀: gàn móu
 干謁: gān yè
 幹謝: qián xiè
-幹豆: gàn dòu
-幹豆腐: gàn dòu fǔ
+乾豆: gàn dòu
+乾豆腐: gàn dòu fǔ
 乾象輦: gàn xiàng niǎn
 幹豫: gàn yù
 幹貌: gàn mào
 乾貝: gān bèi
 乾貨: gān huò
 乾貨船: gān huò chuán
-幹質: gàn zhì
+乾質: gàn zhì
 幹贄: gàn zhì
 幹賞: gàn shǎng
 幹越: gàn yuè
 幹路: gàn lù
-幹蹦蹦: gàn bèng bèng
+乾蹦蹦: gàn bèng bèng
 幹輔: gàn fǔ
-幹辣辣: gàn là là
+乾辣辣: gàn là là
 幹達達: gàn dá dá
 幹運: gàn yùn
-幹進: gàn jìn
+干進: gàn jìn
 干連: gān lián
 幹逆: gàn nì
 乾透: gān tòu
@@ -125502,8 +125502,8 @@
 幹部四化: gàn bù sì huà
 幹部學校: gàn bù xué xiào
 幹都: gàn dōu
-幹酒: gàn jiǔ
-幹酢酒: gàn cù jiǔ
+乾酒: gàn jiǔ
+乾酢酒: gàn cù jiǔ
 乾酪: gān lào
 乾酪素: gān lào sù
 乾酵母: gān jiào mǔ
@@ -125516,30 +125516,30 @@
 幹阿妳: qián ā nǎi
 幹陬: gàn zōu
 幹隱: gàn yǐn
-幹隔澇漢子: gàn gé lào hàn zi
-幹雨: qián yǔ
-幹雪: qián xuě
+乾隔澇漢子: gàn gé lào hàn zi
+乾雨: qián yǔ
+乾雪: qián xuě
 乾雷: gàn léi
-幹霄: gàn xiāo
-幹霄凌雲: gān xiāo líng yún
-幹霄蔽日: gàn xiāo bì rì
+干霄: gàn xiāo
+干霄凌雲: gān xiāo líng yún
+干霄蔽日: gàn xiāo bì rì
 乾霍亂: gān huò luàn
 乾麵: qián miàn
 幹革: gàn gé
-幹韻: gàn yùn
+乾韻: gàn yùn
 干預: gān yù
 乾顙: gàn sǎng
-幹顫: gān chàn
-幹食: gàn shí
+乾顫: gān chàn
+乾食: gàn shí
 乾飯: gān fàn
 幹飾: gàn shì
 乾餾: gān liú
-幹馬: gàn mǎ
+乾馬: gàn mǎ
 乾鮮: qián xiān
 乾鮮果品: gān xiān guǒ pǐn
-幹鱉: gān biē
-幹鳥: qián niǎo
-幹麨: gān chǎo
+乾鱉: gān biē
+乾鳥: qián niǎo
+乾麨: gān chǎo
 幹黷: gàn dú
 幹鼎: gàn dǐng
 平一: píng yī
@@ -127929,7 +127929,7 @@
 庫貯: kù zhù
 庫車: kù chē
 庫車縣: kù chē xiàn
-庫裡提巴: kù lǐ tí bā
+庫里提巴: kù lǐ tí bā
 庫金: kù jīn
 庫銀: kù yín
 庫錦: kù jǐn
@@ -134430,7 +134430,7 @@
 彰揚: zhāng yáng
 彰施: zhāng shī
 彰明: zhāng míng
-彰明昭著: zhāng míng zhāo zhe
+彰明昭著: zhāng míng zhāo zhu
 彰明昭著: zhāng míng zhāo zhù
 彰明較著: zhāng míng jiào zhù
 彰明較著: zhāng míng jiào zhù
@@ -148778,7 +148778,7 @@
 戴仁: dài rén
 戴仰: dài yǎng
 戴任: dài rèn
-戴克裡先: dài kè lǐ xiān
+戴克里先: dài kè lǐ xiān
 戴冠郎: dài guān láng
 戴憑席: dài píng xí
 戴憑經: dài píng jīng
@@ -150799,7 +150799,7 @@
 打簇: dǎ cù
 打簧錶: dǎ huáng biǎo
 打粗: dǎ cū
-打粟幹: dǎ sù gàn
+打粟乾: dǎ sù gàn
 打糧: dǎ liáng
 打緊: dǎ jǐn
 打細: dǎ xì
@@ -152025,7 +152025,7 @@
 扭解: niǔ jiě
 扭轉: niǔ zhuǎn
 扭轉乾坤: niǔ zhuǎn qián kūn
-扭轉幹坤: niǔ zhuǎn gàn kūn
+扭轉乾坤: niǔ zhuǎn gàn kūn
 扭達: niǔ dá
 扭送: niǔ sòng
 扭造: niǔ zào
@@ -162347,7 +162347,7 @@
 推崇備至: tuī chóng bèi zhì
 推己及人: tuī jǐ jí rén
 推己及物: tuī jǐ jí wù
-推幹就溼: tuī gān jiù shī
+推乾就溼: tuī gān jiù shī
 推廣: tuī guǎng
 推度: tuī dù
 推廓: tuī kuò
@@ -164993,7 +164993,7 @@
 撒野: sā yě
 撒門: sā mén
 撒馬利亞: sā mǎ lì yà
-撒馬爾幹: sā mǎ ěr gàn
+撒馬爾干: sā mǎ ěr gàn
 撒馬爾罕: sā mǎ ěr hǎn
 撒騷放屁: sā sāo fàng pì
 撒鴨子: sā yā zǐ
@@ -169220,7 +169220,7 @@
 整雋: zhěng jùn
 整革: zhěng gé
 整頓: zhěng dùn
-整頓幹坤: zhěng dùn gàn kūn
+整頓乾坤: zhěng dùn gàn kūn
 整領: zhěng lǐng
 整風: zhěng fēng
 整風運動: zhěng fēng yùn dòng
@@ -170130,7 +170130,7 @@
 齋屏: zhāi píng
 齋帥: zhāi shuài
 齋幄: zhāi wò
-齋幹: zhāi gàn
+齋乾: zhāi gàn
 齋莊: zhāi zhuāng
 齋廬: zhāi lú
 齋庫: zhāi kù
@@ -173452,7 +173452,7 @@
 旋轉乾坤: xuán zhuǎn qián kūn
 旋轉力: xuán zhuǎn lì
 旋轉臺: xuán zhuǎn tái
-旋轉幹坤: xuán zhuǎn gàn kūn
+旋轉乾坤: xuán zhuǎn gàn kūn
 旋轉指標: xuán zhuǎn zhǐ biāo
 旋轉曲面: xuán zhuǎn qū miàn
 旋轉木馬: xuán zhuǎn mù mǎ
@@ -180420,7 +180420,7 @@
 普遍性: pǔ biàn xìng
 普遍性假設: pǔ biàn xìng jiǎ shè
 普遍理論: pǔ biàn lǐ lùn
-普裡什蒂納: pǔ lǐ shí dì nà
+普里什蒂納: pǔ lǐ shí dì nà
 普里切特: pǔ lǐ qiè tè
 普門: pǔ mén
 普陀: pǔ tuó
@@ -180589,7 +180589,7 @@
 晴嵐: qíng lán
 晴川: qíng chuān
 晴川閣: qíng chuān gé
-晴幹: qíng qián
+晴乾: qíng qián
 晴快: qíng kuài
 晴日: qíng rì
 晴旭: qíng xù
@@ -181153,7 +181153,7 @@
 暗處: àn chù
 暗夜: àn yè
 暗夫: àn fū
-暗頭裡: àn tóu lǐ
+暗頭里: àn tóu lǐ
 暗娼: àn chāng
 暗室: àn shì
 暗室不欺: àn shì bù qī
@@ -185203,7 +185203,7 @@
 木已成舟: mù yǐ chéng zhōu
 木帝: mù dì
 木幔: mù màn
-木幹鳥棲: mù gān niǎo qī
+木乾鳥棲: mù gān niǎo qī
 木床: mù chuáng
 木店: mù diàn
 木弓: mù gōng
@@ -188559,7 +188559,7 @@
 杖化: zhàng huà
 杖化龍: zhàng huà lóng
 杖周: zhàng zhōu
-杖鹹: zhàng xián
+杖咸: zhàng xián
 杖國: zhàng guó
 杖聖: zhàng shèng
 杖頭: zhàng tóu
@@ -188777,7 +188777,7 @@
 杜郵劍: dù yóu jiàn
 杜酒: dù jiǔ
 杜醞: dù yùn
-杜裡: dù lǐ
+杜里: dù lǐ
 杜門: dù mén
 杜門不出: dù mén bù chū
 杜門卻掃: dù mén què sǎo
@@ -191290,7 +191290,7 @@
 林樊: lín fán
 林樾: lín yuè
 林檎: lín qín
-林檎幹: lín qín gàn
+林檎乾: lín qín gàn
 林氏: lín shì
 林池: lín chí
 林沙錐: lín shā zhuī
@@ -191485,7 +191485,7 @@
 果志: guǒ zhì
 果悍: guǒ hàn
 果意: guǒ yì
-果戈裡: guǒ gē lǐ
+果戈里: guǒ gē lǐ
 果成: guǒ chéng
 果報: guǒ bào
 果播: guǒ bō
@@ -191592,7 +191592,7 @@
 枝外生枝: zhī wài shēng zhī
 枝大於本: zhī dà yú běn
 枝頭: zhī tóu
-枝頭幹: zhī tóu gàn
+枝頭乾: zhī tóu gàn
 枝如: zhī rú
 枝子: zhī zǐ
 枝孫: zhī sūn
@@ -205934,7 +205934,7 @@
 水里鄉: shuǐ lǐ xiāng
 水裡去: shuǐ lǐ qù
 水裡水裡去: shuǐ lǐ shuǐ lǐ qù
-水裡納瓜: shuǐ lǐ nà guā
+水里納瓜: shuǐ lǐ nà guā
 水量: shuǐ liàng
 水鑑: shuǐ jiàn
 水缽: shuǐ bō
@@ -207192,7 +207192,7 @@
 池島: chí dǎo
 池州: chí zhōu
 池州市: chí zhōu shì
-池幹: chí gàn
+池乾: chí gàn
 池座: chí zuò
 池心: chí xīn
 池文: chí wén
@@ -209035,7 +209035,7 @@
 沒帳: méi zhàng
 沒帳得算: méi zhàng de suàn
 沒幹: méi gàn
-沒幹淨: méi qián jìng
+沒乾淨: méi qián jìng
 沒幹凈: méi gàn jìng
 沒幹纏: méi gàn chán
 沒平仄: méi píng zè
@@ -210024,9 +210024,9 @@
 油幢: yóu zhuàng
 油幢車: yóu zhuàng chē
 油幰: yóu xiǎn
-油幹火盡: yóu gān huǒ jìn
-油幹燈盡: yóu gān dēng jìn
-油幹燈草盡: yóu gān dēng cǎo jìn
+油乾火盡: yóu gān huǒ jìn
+油乾燈盡: yóu gān dēng jìn
+油乾燈草盡: yóu gān dēng cǎo jìn
 油庫: yóu kù
 油底殼: yóu dǐ ké
 油彩: yóu cǎi
@@ -210454,7 +210454,7 @@
 沾寒: zhān hán
 沾巾: zhān jīn
 沾帶: zhān dài
-沾幹: zhān gàn
+沾乾: zhān gàn
 沾戀: zhān liàn
 沾恤: zhān xù
 霑恩: zhān ēn
@@ -211481,7 +211481,7 @@
 波律膏: bō lǜ gāo
 波律香: bō lǜ xiāng
 波德: bō dé
-波德戈裡察: bō dé gē lǐ chá
+波德戈里察: bō dé gē lǐ chá
 波德申: bō dé shēn
 波德里查: bō dé lǐ chá
 波心: bō xīn
@@ -215447,11 +215447,11 @@
 浣衣: huàn yī
 浣衣局: huàn yī jú
 浣衣菲食: huàn yī fěi shí
-浣衣裡: huàn yī lǐ
+浣衣里: huàn yī lǐ
 浣雪: huàn xuě
 浤浤: hóng hóng
 浥變: yì biàn
-浥幹: yì gān
+浥乾: yì gān
 浥淚: yì lèi
 浥浥: yì yì
 浥爛: yì làn
@@ -216274,7 +216274,7 @@
 海平面: hǎi píng miàn
 海床: hǎi chuáng
 海底: hǎi dǐ
-海底兩萬裡: hǎi dǐ liǎng wàn lǐ
+海底兩萬里: hǎi dǐ liǎng wàn lǐ
 海底地貌: hǎi dǐ dì mào
 海底山脈: hǎi dǐ shān mài
 海底擴張: hǎi dǐ kuò zhāng
@@ -217684,7 +217684,7 @@
 涸凍: hé dòng
 涸堅: hé jiān
 涸塞: hé sāi
-涸思幹慮: hé sī gān lǜ
+涸思干慮: hé sī gān lǜ
 涸旱: hé hàn
 涸澤: hé zé
 涸澤之神: hé zé zhī shén
@@ -218484,8 +218484,8 @@
 深分: shēn fēn
 深切: shēn qiè
 深切地懷念: shēn qiè de huái niàn
-深切著明: shēn qiē zhe míng
-深切著白: shēn qiē zhe bái
+深切著明: shēn qiē zhuo míng
+深切著白: shēn qiē zhuo bái
 深切著明: shēn qiè zhù míng
 深切著白: shēn qiè zhù bái
 深刑: shēn xíng
@@ -223351,7 +223351,7 @@
 燈婢: dēng bì
 燈宴: dēng yàn
 燈宵: dēng xiāo
-燈盡油幹: dēng jìn yóu gān
+燈盡油乾: dēng jìn yóu gān
 燈山: dēng shān
 燈市: dēng shì
 燈帶: dēng dài
@@ -229594,7 +229594,7 @@
 爵踴: jué yǒng
 爵邑: jué yì
 爵裡: jué lǐ
-爵裡刺: jué lǐ cì
+爵里刺: jué lǐ cì
 爵金: jué jīn
 爵釵: jué chāi
 爵韠: jué bì
@@ -231844,7 +231844,7 @@
 犯罪中止: fàn zuì zhōng zhǐ
 犯罪主體: fàn zuì zhǔ tǐ
 犯罪動機: fàn zuì dòng jī
-犯罪團伙: fàn zuì tuán huǒ
+犯罪團夥: fàn zuì tuán huǒ
 犯罪嫌疑人: fàn zuì xián yí rén
 犯罪學: fàn zuì xué
 犯罪客體: fàn zuì kè tǐ
@@ -237755,7 +237755,7 @@
 班代: bān dài
 班會: bān huì
 班伯利: bān bó lì
-班伯裡: bān bó lǐ
+班伯里: bān bó lǐ
 班位: bān wèi
 班倕: bān chuí
 班傅: bān fù
@@ -241377,8 +241377,8 @@
 甫白: fǔ bái
 甫竁: fǔ cuì
 甫能: fǔ néng
-甫裡: fǔ lǐ
-甫裡先生: fǔ lǐ xiān shēng
+甫里: fǔ lǐ
+甫里先生: fǔ lǐ xiān shēng
 甬劇: yǒng jù
 甬官: yǒng guān
 甬江: yǒng jiāng
@@ -243627,7 +243627,7 @@
 留遺: liú yí
 留邸: liú dǐ
 留都: liú dū
-留裡克: liú lǐ kè
+留里克: liú lǐ kè
 留針: liú zhēn
 留鎮: liú zhèn
 留門: liú mén
@@ -248861,7 +248861,7 @@
 的達: de dá
 的這: de zhè
 的那: de nà
-的裡雅斯特: dì lǐ yǎ sī tè
+的里雅斯特: dì lǐ yǎ sī tè
 的音: de yīn
 的顱: de lú
 的顙: de sǎng
@@ -249399,7 +249399,7 @@
 皮帶輪: pí dài lún
 皮帶運輸機: pí dài yùn shū jī
 皮帽: pí mào
-皮幹: pí gàn
+皮乾: pí gàn
 皮庫: pí kù
 皮廌: pí zhì
 皮開肉綻: pí kāi ròu zhàn
@@ -249839,7 +249839,7 @@
 鹽工: yán gōng
 鹽差: yán chà
 鹽巴: yán bā
-鹽幹皮: yán gàn pí
+鹽乾皮: yán gàn pí
 鹽庫: yán kù
 鹽店: yán diàn
 鹽度: yán dù
@@ -254359,7 +254359,7 @@
 睹物傷情: dǔ wù shāng qíng
 睹物興情: dǔ wù xīng qíng
 睹物思人: dǔ wù sī rén
-睹著知微: dǔ zhe zhī wēi
+睹著知微: dǔ zhu zhī wēi
 睹睞: dǔ lài
 睹著知微: dǔ zhù zhī wēi
 睹記: dǔ jì
@@ -262418,7 +262418,7 @@
 禹孫: yǔ sūn
 禹州: yǔ zhōu
 禹州市: yǔ zhōu shì
-禹帳裡: yǔ zhàng lǐ
+禹帳里: yǔ zhàng lǐ
 禹惜寸陰: yǔ xī cùn yīn
 禹政: yǔ zhèng
 禹服: yǔ fú
@@ -265802,7 +265802,7 @@
 移避: yí bì
 移那: yí nà
 移都: yí dōu
-移裡堇: yí lǐ jǐn
+移里堇: yí lǐ jǐn
 移録: yí lù
 移錫: yí xī
 移鎮: yí zhèn
@@ -281095,9 +281095,9 @@
 綺談: qǐ tán
 綺貌: qǐ mào
 綺贍: qǐ shàn
-綺裡: qǐ lǐ
-綺裡季: qǐ lǐ jì
-綺裡祠: qǐ lǐ cí
+綺里: qǐ lǐ
+綺里季: qǐ lǐ jì
+綺里祠: qǐ lǐ cí
 綺錢: qǐ qián
 綺錯: qǐ cuò
 綺闈: qǐ wéi
@@ -293200,7 +293200,7 @@
 騰晶: téng jīng
 騰根: téng gēn
 騰格: téng gé
-騰格裡沙漠: téng gé lǐ shā mò
+騰格里沙漠: téng gé lǐ shā mò
 騰榜: téng bǎng
 騰歡: téng huān
 騰步: téng bù
@@ -293846,7 +293846,7 @@
 自任: zì rèn
 自伐: zì fá
 自休: zì xiū
-自夥淘裡: zì huǒ táo lǐ
+自夥淘里: zì huǒ táo lǐ
 自傳: zì zhuàn
 自傷: zì shāng
 自體免疫疾病: zì tǐ miǎn yì jí bìng
@@ -294641,7 +294641,7 @@
 臭麼: chòu me
 臭名: chòu míng
 臭名昭彰: chòu míng zhāo zhāng
-臭名昭著: chòu míng zhāo zhe
+臭名昭著: chòu míng zhāo zhu
 臭名昭著: chòu míng zhāo zhù
 臭名遠揚: chòu míng yuǎn yáng
 臭味: chòu wèi
@@ -298108,7 +298108,7 @@
 蘇迪曼杯: sū dí màn bēi
 甦醒: sū xǐng
 蘇里南: sū lǐ nán
-蘇裡南河: sū lǐ nán hé
+蘇里南河: sū lǐ nán hé
 蘇金達: sū jīn dá
 蘇鍾: sū zhōng
 蘇鐵: sū tiě
@@ -298136,7 +298136,7 @@
 苑結: yuàn jié
 苑羊: yuàn yáng
 苑裡: yuàn lǐ
-苑裡鎮: yuàn lǐ zhèn
+苑里鎮: yuàn lǐ zhèn
 苑馬: yuàn mǎ
 苒弱: rǎn ruò
 苒惹: rǎn rě
@@ -306991,7 +306991,7 @@
 蟬吟: chán yín
 蟬唱: chán chàng
 蟬啼: chán tí
-蟬喘雷幹: chán chuǎn léi gān
+蟬喘雷乾: chán chuǎn léi gān
 蟬嘒: chán huì
 蟬噪: chán zào
 蟬殼: chán ké
@@ -308464,7 +308464,7 @@
 衉血: kè xuè
 衋傷: xì shāng
 衋然: xì rán
-行萬裡路勝讀萬捲書: xíng wàn lǐ lù shèng dú wàn juǎn shū
+行萬里路勝讀萬捲書: xíng wàn lǐ lù shèng dú wàn juǎn shū
 行下: xíng xià
 行不從徑: xíng bù cóng jìng
 行不副言: xíng bù fù yán
@@ -310489,7 +310489,7 @@
 衷言: zhōng yán
 衷誠: zhōng chéng
 衷赤: zhōng chì
-衷裡衣: zhōng lǐ yī
+衷里衣: zhōng lǐ yī
 衷鑑: zhōng jiàn
 衷音: zhōng yīn
 衺僻: xié pì
@@ -312083,7 +312083,7 @@
 西都: xī dōu
 西鄙: xī bǐ
 西里爾: xī lǐ ěr
-西裡爾字母: xī lǐ ěr zì mǔ
+西里爾字母: xī lǐ ěr zì mǔ
 西里西亞: xī lǐ xī yà
 西里西亞織工起義: xī lǐ xī yà zhī gōng qǐ yì
 西金: xī jīn
@@ -317092,10 +317092,10 @@
 記述: jì shù
 記跡: jì jì
 記裡: jì lǐ
-記裡堆: jì lǐ duī
-記裡車: jì lǐ chē
-記裡鼓: jì lǐ gǔ
-記裡鼓車: jì lǐ gǔ chē
+記里堆: jì lǐ duī
+記里車: jì lǐ chē
+記里鼓: jì lǐ gǔ
+記里鼓車: jì lǐ gǔ chē
 記録: jì lù
 記録本: jì lù běn
 記録片: jì lù piàn
@@ -326402,7 +326402,7 @@
 貞向: zhēn xiàng
 貞吝: zhēn lìn
 貞和: zhēn hé
-貞鹹: zhēn xián
+貞咸: zhēn xián
 貞善: zhēn shàn
 貞器: zhēn qì
 貞固: zhēn gù
@@ -329710,7 +329710,7 @@
 費害: fèi hài
 費爾巴哈: fèi ěr bā hā
 費爾干納: fèi ěr gàn nà
-費爾幹納盆地: fèi ěr gàn nà pén dì
+費爾干納盆地: fèi ěr gàn nà pén dì
 費爾馬: fèi ěr mǎ
 費爾馬大定理: fèi ěr mǎ dà dìng lǐ
 費爾馬猜想: fèi ěr mǎ cāi xiǎng
@@ -336236,7 +336236,7 @@
 踏進: tà jìn
 踏逐: tà zhú
 踏道: tà dào
-踏裡彩: tà lǐ cǎi
+踏里彩: tà lǐ cǎi
 踏鐙: tà dèng
 踏門: tà mén
 踏雨: tà yǔ
@@ -340746,7 +340746,7 @@
 輯譯: jí yì
 輯諧: jí xié
 輯輯: jí jí
-輯裡絲: jí lǐ sī
+輯里絲: jí lǐ sī
 輯録: jí lù
 輯集: jí jí
 輯首: jí shǒu
@@ -343343,7 +343343,7 @@
 邁志: mài zhì
 邁捷: mài jié
 邁景: mài jǐng
-邁杜古裡: mài dù gǔ lǐ
+邁杜古里: mài dù gǔ lǐ
 邁步: mài bù
 邁氣: mài qì
 邁爽: mài shuǎng
@@ -346268,7 +346268,7 @@
 連逮: lián dǎi
 連遱: lián lóu
 連鄣: lián zhāng
-連裡竟街: lián lǐ jìng jiē
+連里竟街: lián lǐ jìng jiē
 連野: lián yě
 連金泥: lián jīn ní
 連鏁: lián suǒ
@@ -355754,7 +355754,7 @@
 鄭衛之音: zhèng wèi zhī yīn
 鄭口: zhèng kǒu
 鄭司農: zhèng sī nóng
-鄭君裡: zhèng jūn lǐ
+鄭君里: zhèng jūn lǐ
 鄭和: zhèng hé
 鄭商: zhèng shāng
 鄭國三良: zhèng guó sān liáng
@@ -356197,8 +356197,8 @@
 都吏: dōu lì
 都君: dōu jūn
 都君子: dōu jūn zǐ
-都鹹: dōu xián
-都鹹子: dōu xián zǐ
+都咸: dōu xián
+都咸子: dōu xián zǐ
 都囉: dōu luō
 都囉囉族: dōu luō luō zú
 都嚕: dōu lū
@@ -357464,7 +357464,7 @@
 醱酵: fā jiào
 醱醅: pō pēi
 酨漿: zài jiāng
-酩子裡: mǐng zǐ lǐ
+酩子里: mǐng zǐ lǐ
 酩酊: mǐng dǐng
 酩酊大醉: mǐng dǐng dà zuì
 酩酊爛醉: mǐng dǐng làn zuì
@@ -358722,7 +358722,7 @@
 裡醜捧心: lǐ chǒu pěng xīn
 裡中: lǐ zhōng
 裡乘: lǐ chéng
-裡也波: lǐ yě bō
+里也波: lǐ yě bō
 裡享: lǐ xiǎng
 里人: lǐ rén
 里仁: lǐ rén
@@ -358797,7 +358797,7 @@
 裡舊: lǐ jiù
 里昂: lǐ áng
 裡曲: lǐ qǔ
-裡朗威: lǐ lǎng wēi
+里朗威: lǐ lǎng wēi
 裡柝: lǐ tuò
 里根: lǐ gēn
 裡棺: lǐ guān
@@ -358814,7 +358814,7 @@
 裡湖: lǐ hú
 裡燕: lǐ yàn
 里瓦幾亞條約: lǐ wǎ jī yà tiáo yuē
-裡瓦爾多: lǐ wǎ ěr duō
+里瓦爾多: lǐ wǎ ěr duō
 里甲: lǐ jiǎ
 裡番: lǐ fān
 裡監: lǐ jiān
@@ -358828,8 +358828,8 @@
 裡籍: lǐ jí
 里約: lǐ yuē
 里約熱內盧: lǐ yuē rè nèi lú
-裡維埃拉: lǐ wéi āi lā
-裡維耶拉: lǐ wéi yē lā
+里維埃拉: lǐ wéi āi lā
+里維耶拉: lǐ wéi yē lā
 里老: lǐ lǎo
 裡耆: lǐ qí
 里耳: lǐ ěr
@@ -358861,7 +358861,7 @@
 里賈納: lǐ jiǎ nà
 裡邊: lǐ bian
 裡邊兒: lǐ bian er
-裡運河: lǐ yùn hé
+里運河: lǐ yùn hé
 裡選: lǐ xuǎn
 裡遞: lǐ dì
 裡通外國: lǐ tōng wài guó
@@ -358882,7 +358882,7 @@
 裡院: lǐ yuàn
 裡面: lǐ miàn
 裡首: lǐ shǒu
-裡馬房: lǐ mǎ fáng
+里馬房: lǐ mǎ fáng
 裡魁: lǐ kuí
 重三: zhòng sān
 重三疊四: chóng sān dié sì
@@ -361133,7 +361133,7 @@
 金醅: jīn pēi
 金醴: jīn lǐ
 金採: jīn cǎi
-金裡奇: jīn lǐ qí
+金里奇: jīn lǐ qí
 金釭: jīn gāng
 金鈚: jīn pī
 金鉔: jīn zā
@@ -363645,7 +363645,7 @@
 鐵道兵: tiě dào bīng
 鐵道部: tiě dào bù
 鐵郭金城: tiě guō jīn chéng
-鐵裡溫: tiě lǐ wēn
+鐵里溫: tiě lǐ wēn
 鐵鎝: tiě dā
 鐵鑛: tiě kuàng
 鐵釘: tiě dīng
@@ -367030,7 +367030,7 @@
 長工: cháng gōng
 長差: cháng chà
 長帥: cháng shuài
-長幹: cháng gàn
+長干: cháng gàn
 長干曲: cháng gàn qǔ
 長平: cháng píng
 長平之戰: cháng píng zhī zhàn
@@ -368778,7 +368778,7 @@
 閒淘氣: xián táo qì
 閒淡: xián dàn
 閒深: xián shēn
-閒深裡: xián shēn lǐ
+閒深里: xián shēn lǐ
 閒混: xián hùn
 閒清: xián qīng
 閒遊: xián yóu
@@ -369076,7 +369076,7 @@
 閔嘿: mǐn hēi
 閔天: mǐn tiān
 閔子: mǐn zǐ
-閔子裡: mǐn zǐ lǐ
+閔子里: mǐn zǐ lǐ
 閔察: mǐn chá
 閔憂: mǐn yōu
 閔念: mǐn niàn
@@ -371620,7 +371620,7 @@
 阿丘: ā qiū
 阿丹: ā dān
 阿主: ā zhǔ
-阿主沙裡: ā zhǔ shā lǐ
+阿主沙里: ā zhǔ shā lǐ
 阿麗亞娜: ā lì yà nà
 阿鄉: ā xiāng
 阿買: ā mǎi
@@ -372226,7 +372226,7 @@
 阿貴: ā guì
 阿賴耶: ā lài yē
 阿賴耶識: ā lài yē shí
-阿赫蒂薩裡: ā hè dì sà lǐ
+阿赫蒂薩里: ā hè dì sà lǐ
 阿越: ā yuè
 阿輔: ā fǔ
 阿輸迦: ā shū jiā
@@ -372852,7 +372852,7 @@
 陳啟: chén qǐ
 陳吳: chén wú
 陳告: chén gào
-陳鹹之憾: chén xián zhī hàn
+陳咸之憾: chén xián zhī hàn
 陳善閉邪: chén shàn bì xié
 陳器: chén qì
 陳因: chén yīn
@@ -382298,7 +382298,7 @@
 韃靼: dá dá
 韃靼人: dá dá rén
 韃靼海峽: dá dá hǎi xiá
-韃韃裡: dá dá lǐ
+韃韃里: dá dá lǐ
 鞓帶: tīng dài
 鞓紅: tīng hóng
 鞔革: mán gé
@@ -385698,7 +385698,7 @@
 顛仆流離: diān pú liú lí
 顛倒: diān dǎo
 顛倒乾坤: diān dǎo qián kūn
-顛倒幹坤: diān dǎo gàn kūn
+顛倒乾坤: diān dǎo gàn kūn
 顛倒是非: diān dǎo shì fēi
 顛倒衣裳: diān dǎo yī cháng
 顛倒過來: diān dǎo guò lái
@@ -387653,7 +387653,7 @@
 食少事煩: shí shǎo shì fán
 食少事繁: shí shǎo shì fán
 食工: shí gōng
-食幹: shí gàn
+食乾: shí gàn
 食床: shí chuáng
 食店: shí diàn
 食徵: shí zhēng
@@ -390583,7 +390583,7 @@
 馬斯垂剋: mǎ sī chuí kè
 馬斯河: mǎ sī hé
 馬斯洛: mǎ sī luò
-馬斯特裡赫特: mǎ sī tè lǐ hè tè
+馬斯特里赫特: mǎ sī tè lǐ hè tè
 馬日: mǎ mì
 馬日事變: mǎ mì shì biàn
 馬明王: mǎ míng wáng
@@ -390824,7 +390824,7 @@
 馬芬: mǎ fēn
 馬莧: mǎ xiàn
 馬蘇德: mǎ sū dé
-馬蘇裡拉: mǎ sū lǐ lā
+馬蘇里拉: mǎ sū lǐ lā
 馬苑: mǎ yuàn
 馬英九: mǎ yīng jiǔ
 馬茹子: mǎ rú zǐ
@@ -390985,12 +390985,12 @@
 馬酪: mǎ lào
 馬酮: mǎ tóng
 馬醉木: mǎ zuì mù
-馬裡: mǎ lǐ
-馬裡亞納海溝: mǎ lǐ yà nà hǎi gōu
+馬里: mǎ lǐ
+馬里亞納海溝: mǎ lǐ yà nà hǎi gōu
 馬里亞納群島: mǎ lǐ yà nà qún dǎo
 馬里蘭: mǎ lǐ lán
 馬里蘭州: mǎ lǐ lán zhōu
-馬裡博爾: mǎ lǐ bó ěr
+馬里博爾: mǎ lǐ bó ěr
 馬里奧: mǎ lǐ ào
 馬金南: mǎ jīn nán
 馬金囊: mǎ jīn náng
@@ -395760,7 +395760,7 @@
 魅虛: mèi xū
 魅鬽: mèi mèi
 魆地: xū dì
-魆地裡: xū dì lǐ
+魆地里: xū dì lǐ
 魆地閒: xū dì xián
 魆律律: xū lǜ lǜ
 魆的: xū de
@@ -399193,7 +399193,7 @@
 鴻漸: hóng jiàn
 鴻漸之儀: hóng jiàn zhī yí
 鴻漸之翼: hóng jiàn zhī yì
-鴻漸於幹: hóng jiàn yú gàn
+鴻漸於干: hóng jiàn yú gàn
 鴻渚: hóng zhǔ
 鴻渞: hóng qiú
 鴻渥: hóng wò
@@ -402771,7 +402771,7 @@
 黏留: nián liú
 黏痰: nián tán
 黏皮帶骨: nián pí dài gǔ
-黏皮著骨: nián pí zhe gǔ
+黏皮著骨: nián pí zhuo gǔ
 黏著: nián zhe
 黏著力: nián zhuó lì
 黏著性: nián zhuó xìng
@@ -406491,3 +406491,4 @@ T恤: tī xù
 應付: yìng fu
 應付: yīng fù
 不是: bù shì
+這是: zhè shì
